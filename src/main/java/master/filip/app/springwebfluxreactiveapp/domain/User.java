@@ -1,9 +1,19 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "user")
 public class User {
 
+    @Id
     private int id;
+
+    @Field("username")
     private String username;
+
+    @Field("password")
     private String password;
 
     public User() {
