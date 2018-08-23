@@ -7,8 +7,8 @@ import reactor.core.publisher.Flux;
 
 import java.util.Date;
 
-@Repository
-public interface EventRepository extends ReactiveMongoRepository<Event, Integer> {
+//@Repository
+public interface EventRepository  {
 
     Flux<Event> findByName(String name);
 

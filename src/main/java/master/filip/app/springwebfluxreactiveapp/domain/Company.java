@@ -1,25 +1,35 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "company")
 public class Company {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "name")
     private String name;
+
+    @Field(value = "address")
     private String address;
 
     public Company() {
     }
 
-    public Company(int id, String name, String address) {
+    public Company(String id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,5 +47,14 @@ public class Company {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

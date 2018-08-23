@@ -1,23 +1,31 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "style_of_event")
 public class StyleOfEvent {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "nameOfStyle")
     private String nameOfStyle;
 
     public StyleOfEvent() {
     }
 
-    public StyleOfEvent(int id, String nameOfStyle) {
+    public StyleOfEvent(String id, String nameOfStyle) {
         this.id = id;
         this.nameOfStyle = nameOfStyle;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -27,5 +35,13 @@ public class StyleOfEvent {
 
     public void setNameOfStyle(String nameOfStyle) {
         this.nameOfStyle = nameOfStyle;
+    }
+
+    @Override
+    public String toString() {
+        return "StyleOfEvent{" +
+                "id='" + id + '\'' +
+                ", nameOfStyle='" + nameOfStyle + '\'' +
+                '}';
     }
 }

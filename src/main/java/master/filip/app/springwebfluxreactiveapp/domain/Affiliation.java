@@ -1,25 +1,35 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "affilation")
 public class Affiliation {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "group")
     private Group group;
+
+    @Field(value = "member")
     private Member member;
 
     public Affiliation() {
     }
 
-    public Affiliation(int id, Group group, Member member) {
+    public Affiliation(String id, Group group, Member member) {
         this.id = id;
         this.group = group;
         this.member = member;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,5 +47,14 @@ public class Affiliation {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    @Override
+    public String toString() {
+        return "Affiliation{" +
+                "id='" + id + '\'' +
+                ", group=" + group +
+                ", member=" + member +
+                '}';
     }
 }

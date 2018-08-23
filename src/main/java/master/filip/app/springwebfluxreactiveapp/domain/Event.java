@@ -1,21 +1,39 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.util.Date;
 
+@Document(collection = "event")
 public class Event {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "nameOfEvent")
     private String nameOfEvent;
+
+    @Field(value = "description")
     private String description;
+
+    @Field(value = "dateFrom")
     private Date dateFrom;
+
+    @Field(value = "dateTo")
     private Date dateTo;
+
+    @Field(value = "styleOfEvent")
     private StyleOfEvent styleOfEvent;
+
+    @Field(value = "typeOfEvent")
     private TypeOfEvent typeOfEvent;
 
     public Event() {
     }
 
-    public Event(int id, String nameOfEvent, String description, Date dateFrom, Date dateTo, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent) {
+    public Event(String id, String nameOfEvent, String description, Date dateFrom, Date dateTo, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent) {
         this.id = id;
         this.nameOfEvent = nameOfEvent;
         this.description = description;
@@ -25,11 +43,11 @@ public class Event {
         this.typeOfEvent = typeOfEvent;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,5 +97,18 @@ public class Event {
 
     public void setTypeOfEvent(TypeOfEvent typeOfEvent) {
         this.typeOfEvent = typeOfEvent;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id='" + id + '\'' +
+                ", nameOfEvent='" + nameOfEvent + '\'' +
+                ", description='" + description + '\'' +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                ", styleOfEvent=" + styleOfEvent +
+                ", typeOfEvent=" + typeOfEvent +
+                '}';
     }
 }

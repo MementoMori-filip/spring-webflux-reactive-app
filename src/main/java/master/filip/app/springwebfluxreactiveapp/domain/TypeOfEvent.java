@@ -1,23 +1,31 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "type_of_event")
 public class TypeOfEvent {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "nameOfType")
     private String nameOfType;
 
     public TypeOfEvent() {
     }
 
-    public TypeOfEvent(int id, String nameOfType) {
+    public TypeOfEvent(String id, String nameOfType) {
         this.id = id;
         this.nameOfType = nameOfType;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -27,5 +35,13 @@ public class TypeOfEvent {
 
     public void setNameOfType(String nameOfType) {
         this.nameOfType = nameOfType;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeOfEvent{" +
+                "id='" + id + '\'' +
+                ", nameOfType='" + nameOfType + '\'' +
+                '}';
     }
 }

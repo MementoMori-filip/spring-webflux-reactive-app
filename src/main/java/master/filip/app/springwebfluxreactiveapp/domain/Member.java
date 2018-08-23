@@ -1,27 +1,39 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(collection = "member")
 public class Member {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "nameAndSurname")
     private String nameAndSurname;
+
+    @Field(value = "email")
     private String email;
+
+    @Field(value = "company")
     private Company company;
 
     public Member() {
     }
 
-    public Member(int id, String nameAndSurname, String email, Company company) {
+    public Member(String id, String nameAndSurname, String email, Company company) {
         this.id = id;
         this.nameAndSurname = nameAndSurname;
         this.email = email;
         this.company = company;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,5 +59,15 @@ public class Member {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", nameAndSurname='" + nameAndSurname + '\'' +
+                ", email='" + email + '\'' +
+                ", company=" + company +
+                '}';
     }
 }

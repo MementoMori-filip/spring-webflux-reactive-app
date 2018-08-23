@@ -2,6 +2,7 @@ package master.filip.app.springwebfluxreactiveapp.service.user;
 
 import master.filip.app.springwebfluxreactiveapp.domain.User;
 import master.filip.app.springwebfluxreactiveapp.repository.user.UserRepository;
+import master.filip.app.springwebfluxreactiveapp.repository.user.UserTestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -13,9 +14,13 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserTestRepository userTestRepository;
+
     @Override
     public Flux<User> findAllUsers() {
-        return userRepository.findAll();
+        /*return userRepository.findAll();*/
+        return userTestRepository.retrieveAllUsers();
     }
 
     @Override
@@ -30,6 +35,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Mono<Boolean> isUserExist(User user) {
-        return userRepository.existsById(user.getId());
+        return userRepository.existsById(0);
     }
 }

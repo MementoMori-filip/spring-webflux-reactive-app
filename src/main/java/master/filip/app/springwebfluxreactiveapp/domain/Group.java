@@ -1,23 +1,31 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document(value = "group")
 public class Group {
 
-    private int id;
+    @Id
+    private String id;
+
+    @Field(value = "nameOfGroup")
     private String nameOfGroup;
 
     public Group() {
     }
 
-    public Group(int id, String nameOfGroup) {
+    public Group(String id, String nameOfGroup) {
         this.id = id;
         this.nameOfGroup = nameOfGroup;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -27,5 +35,13 @@ public class Group {
 
     public void setNameOfGroup(String nameOfGroup) {
         this.nameOfGroup = nameOfGroup;
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id='" + id + '\'' +
+                ", nameOfGroup='" + nameOfGroup + '\'' +
+                '}';
     }
 }
