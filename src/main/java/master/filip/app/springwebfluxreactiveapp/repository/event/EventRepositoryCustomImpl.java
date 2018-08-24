@@ -20,7 +20,7 @@ public class EventRepositoryCustomImpl implements EventRepositoryCustom{
     public Mono<Void> updateEvent(Event dbEvent, Event event) {
 
         Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(Integer.toString(dbEvent.getId())));
+        query.addCriteria(Criteria.where("id").is(Integer.toString(0)));
 
         Event eventTemplate = mongoOperations.findOne(query, Event.class);
 

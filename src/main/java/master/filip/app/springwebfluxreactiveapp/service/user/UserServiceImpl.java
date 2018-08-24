@@ -8,33 +8,39 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Service
+@Service("UserServiceImpl")
 public class UserServiceImpl implements UserService{
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserTestRepository userTestRepository;
+/*    @Autowired
+    private UserRepository userRepository;*/
 
     @Override
     public Flux<User> findAllUsers() {
         /*return userRepository.findAll();*/
-        return userTestRepository.retrieveAllUsers();
+        return null;
     }
 
     @Override
-    public Mono<User> findUserById(int id) {
-        return userRepository.findById(id);
+    public Mono<User> findUserById(String id) {
+        /*return userRepository.findById(id);*/
+        return null;
     }
 
     @Override
     public Mono<User> registerUser(User user) {
-        return userRepository.save(user);
+        /*return userRepository.save(user);*/
+        return null;
     }
 
     @Override
     public Mono<Boolean> isUserExist(User user) {
-        return userRepository.existsById(0);
+        /*return userRepository.existsById(user.getId());*/
+        return null;
+    }
+
+    @Override
+    public Mono<User> insertUser(User user) {
+        /*return userRepository.save(user);*/
+        return null;
     }
 }

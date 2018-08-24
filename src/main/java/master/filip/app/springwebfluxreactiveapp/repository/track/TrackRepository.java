@@ -4,6 +4,5 @@ import master.filip.app.springwebfluxreactiveapp.domain.Track;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface TrackRepository extends ReactiveMongoRepository<Track, Integer> {
+public interface TrackRepository extends ReactiveMongoRepository<Track, String> {
 }

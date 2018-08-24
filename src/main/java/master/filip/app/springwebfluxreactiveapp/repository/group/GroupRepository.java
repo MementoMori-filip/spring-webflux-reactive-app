@@ -4,7 +4,7 @@ import master.filip.app.springwebfluxreactiveapp.domain.Group;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
 
-public interface GroupRepository extends ReactiveMongoRepository<Group, Integer> {
+public interface GroupRepository extends ReactiveMongoRepository<Group, String> {
 
     Flux<Group> findAllByNameOfGroup(String name);
 }

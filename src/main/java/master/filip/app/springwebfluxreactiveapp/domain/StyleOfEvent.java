@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "style_of_event")
+@Document(collection = "styleOfEvent")
 public class StyleOfEvent {
 
     @Id

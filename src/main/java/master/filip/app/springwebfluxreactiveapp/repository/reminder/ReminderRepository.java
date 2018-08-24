@@ -4,6 +4,5 @@ import master.filip.app.springwebfluxreactiveapp.domain.Reminder;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface ReminderRepository extends ReactiveMongoRepository<Reminder, Integer> {
+public interface ReminderRepository extends ReactiveMongoRepository<Reminder, String> {
 }

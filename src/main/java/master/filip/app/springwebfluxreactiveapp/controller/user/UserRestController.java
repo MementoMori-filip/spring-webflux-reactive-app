@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/private")
 public class UserRestController {
 
-    @Autowired
+/*    @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/users")
@@ -29,8 +29,9 @@ public class UserRestController {
 
     @GetMapping("/users/{id}")
     public Mono<ResponseEntity<User>> getUserById(@PathVariable(value="id") Integer userID){
-        return userRepository.findById(userID)
+        *//*return userRepository.findById(userID)
                 .map(user -> ResponseEntity.ok(user))
-                .defaultIfEmpty(ResponseEntity.notFound().build());
-    }
+                .defaultIfEmpty(ResponseEntity.notFound().build());*//*
+        return null;
+    }*/
 }

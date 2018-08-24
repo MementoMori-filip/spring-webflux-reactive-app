@@ -8,9 +8,11 @@ public interface UserService {
 
     Flux<User> findAllUsers();
 
-    Mono<User> findUserById(int id);
+    Mono<User> findUserById(String id);
 
     Mono<User> registerUser(User user);
 
     Mono<Boolean> isUserExist(User user);
+
+    Mono<User> insertUser(User user);
 }

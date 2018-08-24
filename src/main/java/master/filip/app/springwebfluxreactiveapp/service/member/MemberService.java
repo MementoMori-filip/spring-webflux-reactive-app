@@ -8,7 +8,7 @@ public interface MemberService {
 
     Flux<Member> findAll();
 
-    Mono<Member> findMemberById(int id);
+    Mono<Member> findMemberById(String id);
 
     Mono<Member> findMemberByNameAndSurname(String nameAndSurname);
 

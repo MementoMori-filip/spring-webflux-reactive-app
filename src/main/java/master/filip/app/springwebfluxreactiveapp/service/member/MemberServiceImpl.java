@@ -3,9 +3,11 @@ package master.filip.app.springwebfluxreactiveapp.service.member;
 import master.filip.app.springwebfluxreactiveapp.domain.Member;
 import master.filip.app.springwebfluxreactiveapp.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service("MemberServiceImpl")
 public class MemberServiceImpl implements MemberService{
 
     @Autowired
@@ -17,7 +19,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Mono<Member> findMemberById(int id) {
+    public Mono<Member> findMemberById(String id) {
         return memberRepository.findById(id);
     }
 

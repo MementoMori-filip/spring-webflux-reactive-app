@@ -10,7 +10,7 @@ public interface TrackService {
 
     Flux<Track> findAllTracks();
 
-    Mono<Track> findTrackById(int id);
+    Mono<Track> findTrackById(String id);
 
     Mono<Track> findWithBiggestId();
 

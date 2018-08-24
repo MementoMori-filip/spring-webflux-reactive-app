@@ -4,11 +4,13 @@ import master.filip.app.springwebfluxreactiveapp.domain.Event;
 import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepository;
 import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Date;
 
+@Service("EventServiceImpl")
 public class EventServiceImpl {
 
 //    @Autowired

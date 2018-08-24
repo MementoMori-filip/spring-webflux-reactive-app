@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "type_of_event")
+@Document(collection = "typeOfEvent")
 public class TypeOfEvent {
 
     @Id

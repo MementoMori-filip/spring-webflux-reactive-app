@@ -1,6 +1,7 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,9 +11,11 @@ public class Affiliation {
     @Id
     private String id;
 
+    @DBRef
     @Field(value = "group")
     private Group group;
 
+    @DBRef
     @Field(value = "member")
     private Member member;
 

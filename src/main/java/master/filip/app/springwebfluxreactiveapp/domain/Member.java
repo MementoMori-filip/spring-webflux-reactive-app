@@ -19,14 +19,18 @@ public class Member {
     @Field(value = "company")
     private Company company;
 
+    @Field(value = "user")
+    private User user;
+
     public Member() {
     }
 
-    public Member(String id, String nameAndSurname, String email, Company company) {
+    public Member(String id, String nameAndSurname, String email, Company company, User user) {
         this.id = id;
         this.nameAndSurname = nameAndSurname;
         this.email = email;
         this.company = company;
+        this.user = user;
     }
 
     public String getId() {
@@ -61,6 +65,14 @@ public class Member {
         this.company = company;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -68,6 +80,7 @@ public class Member {
                 ", nameAndSurname='" + nameAndSurname + '\'' +
                 ", email='" + email + '\'' +
                 ", company=" + company +
+                ", user=" + user +
                 '}';
     }
 }

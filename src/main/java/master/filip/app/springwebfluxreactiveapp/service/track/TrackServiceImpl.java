@@ -6,9 +6,11 @@ import master.filip.app.springwebfluxreactiveapp.domain.Member;
 import master.filip.app.springwebfluxreactiveapp.domain.Track;
 import master.filip.app.springwebfluxreactiveapp.repository.track.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service("TrackServiceImpl")
 public class TrackServiceImpl implements TrackService{
 
     @Autowired
@@ -20,7 +22,7 @@ public class TrackServiceImpl implements TrackService{
     }
 
     @Override
-    public Mono<Track> findTrackById(int id) {
+    public Mono<Track> findTrackById(String id) {
         return trackRepository.findById(id);
     }
 
@@ -31,12 +33,6 @@ public class TrackServiceImpl implements TrackService{
 
     @Override
     public Mono<Track> createTrack(Member member, Event event) {
-
-        int max = 0;
-        Mono<Track> trackID = findWithBiggestId();
-        //dodeli max vrednost iz trackID
-        Track track = new Track(max, member, event);
-
-        return trackRepository.save(track);
+        return null;
     }
 }

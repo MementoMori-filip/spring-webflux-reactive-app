@@ -4,6 +4,5 @@ import master.filip.app.springwebfluxreactiveapp.domain.Affiliation;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AffiliationRepository extends ReactiveMongoRepository<Affiliation, Integer> {
+public interface AffiliationRepository extends ReactiveMongoRepository<Affiliation, String> {
 }
