@@ -6,9 +6,9 @@ import reactor.core.publisher.Mono;
 
 public interface ReminderService {
 
-    Mono<Reminder> createReminder(Reminder reminder);
+    Flux<Reminder> listAll();
 
-    Mono<Void> deleteReminderById(String id);
+    Mono<Reminder> saveOrUpdate(Reminder reminder);
 
-    Flux<Reminder> findAll();
+    Mono<Void> delete(Reminder reminder);
 }

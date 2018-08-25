@@ -1,8 +1,5 @@
 package master.filip.app.springwebfluxreactiveapp.service.track;
 
-import master.filip.app.springwebfluxreactiveapp.domain.Event;
-import master.filip.app.springwebfluxreactiveapp.domain.Group;
-import master.filip.app.springwebfluxreactiveapp.domain.Member;
 import master.filip.app.springwebfluxreactiveapp.domain.Track;
 import master.filip.app.springwebfluxreactiveapp.repository.track.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +14,17 @@ public class TrackServiceImpl implements TrackService{
     private TrackRepository trackRepository;
 
     @Override
-    public Flux<Track> findAllTracks() {
+    public Flux<Track> listAll() {
         return trackRepository.findAll();
     }
 
     @Override
-    public Mono<Track> findTrackById(String id) {
-        return trackRepository.findById(id);
+    public Mono<Track> getById(Track track) {
+        return trackRepository.findById(track.getId());
     }
 
     @Override
-    public Mono<Track> findWithBiggestId() {
-        return null;
-    }
-
-    @Override
-    public Mono<Track> createTrack(Member member, Event event) {
-        return null;
+    public Mono<Track> saveOrUpdate(Track track) {
+        return trackRepository.insert(track);
     }
 }

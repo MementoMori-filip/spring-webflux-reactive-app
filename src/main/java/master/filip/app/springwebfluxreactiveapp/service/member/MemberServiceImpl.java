@@ -14,22 +14,23 @@ public class MemberServiceImpl implements MemberService{
     private MemberRepository memberRepository;
 
     @Override
-    public Flux<Member> findAll() {
+    public Flux<Member> listAll() {
         return memberRepository.findAll();
     }
 
     @Override
-    public Mono<Member> findMemberById(String id) {
-        return memberRepository.findById(id);
+    public Mono<Member> getById(Member member) {
+        return memberRepository.findById(member.getId());
     }
 
     @Override
-    public Mono<Member> findMemberByNameAndSurname(String nameAndSurname) {
+    public Mono<Member> findMemberByNameAndSurname(Member member) {
+        //dovrsi custom repository
         return null;
     }
 
     @Override
-    public Mono<Member> createMember(Member member) {
+    public Mono<Member> saveOrUpdate(Member member) {
         return memberRepository.save(member);
     }
 }

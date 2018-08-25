@@ -6,11 +6,11 @@ import reactor.core.publisher.Mono;
 
 public interface MemberService {
 
-    Flux<Member> findAll();
+    Flux<Member> listAll();
 
-    Mono<Member> findMemberById(String id);
+    Mono<Member> getById(Member member);
 
-    Mono<Member> findMemberByNameAndSurname(String nameAndSurname);
+    Mono<Member> findMemberByNameAndSurname(Member member);
 
-    Mono<Member> createMember(Member member);
+    Mono<Member> saveOrUpdate(Member member);
 }

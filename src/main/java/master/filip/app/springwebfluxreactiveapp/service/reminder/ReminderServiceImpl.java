@@ -10,24 +10,23 @@ import reactor.core.publisher.Mono;
 @Service("ReminderServiceImpl")
 public class ReminderServiceImpl implements ReminderService{
 
-/*    @Autowired
-    private ReminderRepository reminderRepository;*/
+    @Autowired
+    private ReminderRepository reminderRepository;
 
     @Override
-    public Mono<Reminder> createReminder(Reminder reminder) {
-        /*return reminderRepository.save(reminder);*/
-        return null;
+    public Flux<Reminder> listAll() {
+        return reminderRepository.findAll();
     }
 
     @Override
-    public Mono<Void> deleteReminderById(String id) {
-        /*return reminderRepository.deleteById(id);*/
-        return null;
+    public Mono<Reminder> saveOrUpdate(Reminder reminder) {
+        return reminderRepository.save(reminder);
     }
 
     @Override
-    public Flux<Reminder> findAll() {
-        /*return reminderRepository.findAll();*/
-        return null;
+    public Mono<Void> delete(Reminder reminder) {
+        return reminderRepository.delete(reminder);
     }
+
+
 }

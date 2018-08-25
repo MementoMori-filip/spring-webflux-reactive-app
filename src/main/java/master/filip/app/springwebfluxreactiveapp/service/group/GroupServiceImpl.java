@@ -14,17 +14,18 @@ public class GroupServiceImpl implements GroupService{
     private GroupRepository groupRepository;
 
     @Override
-    public Mono<Group> createGroup(Group group) {
-        return groupRepository.save(group);
-    }
-
-    @Override
-    public Flux<Group> findAll() {
+    public Flux<Group> listAll() {
         return groupRepository.findAll();
     }
 
     @Override
-    public Flux<Group> findAllByName(String name) {
-        return groupRepository.findAllByNameOfGroup(name);
+    public Flux<Group> listAllByName(String name) {
+        //dovrsi custom repository
+        return null;
+    }
+
+    @Override
+    public Mono<Group> saveOrUpdate(Group group) {
+        return groupRepository.save(group);
     }
 }

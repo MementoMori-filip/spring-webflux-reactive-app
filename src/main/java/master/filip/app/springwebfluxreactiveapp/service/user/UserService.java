@@ -6,13 +6,13 @@ import reactor.core.publisher.Mono;
 
 public interface UserService {
 
-    Flux<User> findAllUsers();
+    Flux<User> listAll();
 
-    Mono<User> findUserById(String id);
+    Mono<User> getById(String id);
 
-    Mono<User> registerUser(User user);
+    Mono<User> saveOrUpdate(User user);
 
-    Mono<Boolean> isUserExist(User user);
+    Mono<Boolean> isExists(User user);
 
-    Mono<User> insertUser(User user);
+    Mono<User> insert(User user);
 }

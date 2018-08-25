@@ -6,9 +6,9 @@ import reactor.core.publisher.Mono;
 
 public interface GroupService {
 
-    Mono<Group> createGroup(Group group);
+    Flux<Group> listAll();
 
-    Flux<Group> findAll();
+    Flux<Group> listAllByName(String name);
 
-    Flux<Group> findAllByName(String name);
+    Mono<Group> saveOrUpdate(Group group);
 }

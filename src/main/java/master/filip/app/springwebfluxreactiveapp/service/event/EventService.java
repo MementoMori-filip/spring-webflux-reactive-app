@@ -8,17 +8,15 @@ import java.util.Date;
 
 public interface EventService {
 
-    Flux<Event> findAllEvent();
+    Flux<Event> listAll();
 
-    Mono<Event> findById(int id);
+    Mono<Event> getById(String id);
 
-    Flux<Event> findByName(String name);
+    Flux<Event> getByName(String name);
 
-    Flux<Event> findForDate(Date dateFrom, Date dateTo);
+    Flux<Event> getForDate(Date dateFrom, Date dateTo);
 
-    Mono<Event> createEvent(Event event);
+    Mono<Event> saveOrUpdate(Event event);
 
-    Mono<Void> deleteEventById(int id);
-
-    Mono<Void> updateEvent(Event dbEvent, Event event);
+    Mono<Void> delete(Event event);
 }

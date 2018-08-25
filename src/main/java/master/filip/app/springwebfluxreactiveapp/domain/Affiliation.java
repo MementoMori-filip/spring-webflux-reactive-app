@@ -15,7 +15,6 @@ public class Affiliation {
     @Field(value = "group")
     private Group group;
 
-    @DBRef
     @Field(value = "member")
     private Member member;
 

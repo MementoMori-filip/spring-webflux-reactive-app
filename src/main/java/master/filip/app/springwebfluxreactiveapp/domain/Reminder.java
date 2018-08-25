@@ -19,7 +19,6 @@ public class Reminder {
     @Field(value = "date")
     private Date date;
 
-    @DBRef
     @Field(value = "member")
     private Member member;
 
