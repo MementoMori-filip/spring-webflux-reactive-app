@@ -37,4 +37,9 @@ public class UserServiceImpl implements UserService{
     public Mono<User> insert(User user) {
         return userRepository.insert(user);
     }
+
+    @Override
+    public Mono<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

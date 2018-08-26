@@ -15,4 +15,7 @@ public interface UserService {
     Mono<Boolean> isExists(User user);
 
     Mono<User> insert(User user);
+
+    //za testiranje
+    Mono<User> getUserByUsername (String username);
 }
