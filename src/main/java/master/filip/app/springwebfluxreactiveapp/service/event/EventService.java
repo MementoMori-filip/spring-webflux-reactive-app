@@ -12,7 +12,7 @@ public interface EventService {
 
     Mono<Event> getById(String id);
 
-    Flux<Event> getByName(String name);
+    Flux<Event> findByNameOfEvent(String nameOfEvent);
 
     Flux<Event> getForDate(Date dateFrom, Date dateTo);
 

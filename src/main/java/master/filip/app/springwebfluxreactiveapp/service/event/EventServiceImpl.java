@@ -27,13 +27,15 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public Flux<Event> getByName(String name) {
-        return eventRepository.getByName(name);
+    public Flux<Event> findByNameOfEvent(String nameOfEvent) {
+        /*return eventRepository.getByName(name);*/
+        return null;
     }
 
     @Override
     public Flux<Event> getForDate(Date dateFrom, Date dateTo) {
-        return eventRepository.getForDate(dateFrom, dateTo);
+        /*return eventRepository.getForDate(dateFrom, dateTo);*/
+        return null;
     }
 
     @Override

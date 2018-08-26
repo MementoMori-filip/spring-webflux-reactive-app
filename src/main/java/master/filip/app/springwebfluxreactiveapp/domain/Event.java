@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Document(collection = "event")
 public class Event {
@@ -110,5 +111,24 @@ public class Event {
                 ", styleOfEvent=" + styleOfEvent +
                 ", typeOfEvent=" + typeOfEvent +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id) &&
+                Objects.equals(nameOfEvent, event.nameOfEvent) &&
+                Objects.equals(description, event.description) &&
+                Objects.equals(dateFrom, event.dateFrom) &&
+                Objects.equals(dateTo, event.dateTo) &&
+                Objects.equals(styleOfEvent, event.styleOfEvent) &&
+                Objects.equals(typeOfEvent, event.typeOfEvent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nameOfEvent, description, dateFrom, dateTo, styleOfEvent, typeOfEvent);
     }
 }

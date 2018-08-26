@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Objects;
+
 @Document(collection = "track")
 public class Track {
 
@@ -56,5 +58,20 @@ public class Track {
                 ", member=" + member +
                 ", event=" + event +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return Objects.equals(id, track.id) &&
+                Objects.equals(member, track.member) &&
+                Objects.equals(event, track.event);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, member, event);
     }
 }

@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Objects;
+
 @Document(collection = "styleOfEvent")
 public class StyleOfEvent {
 
@@ -43,5 +45,19 @@ public class StyleOfEvent {
                 "id='" + id + '\'' +
                 ", nameOfStyle='" + nameOfStyle + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StyleOfEvent that = (StyleOfEvent) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(nameOfStyle, that.nameOfStyle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nameOfStyle);
     }
 }

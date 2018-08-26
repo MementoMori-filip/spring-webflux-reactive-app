@@ -24,8 +24,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Mono<Member> findMemberByNameAndSurname(Member member) {
-        //dovrsi custom repository
+    public Flux<Member> findByNameAndSurname(String nameAndSurname) {
+/*        return memberRepository.findByNameAndSurname(nameAndSurname);*/
         return null;
     }
 

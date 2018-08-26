@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Objects;
+
 @Document(collection = "member")
 public class Member {
 
@@ -82,5 +84,22 @@ public class Member {
                 ", company=" + company +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(id, member.id) &&
+                Objects.equals(nameAndSurname, member.nameAndSurname) &&
+                Objects.equals(email, member.email) &&
+                Objects.equals(company, member.company) &&
+                Objects.equals(user, member.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nameAndSurname, email, company, user);
     }
 }

@@ -1,9 +1,10 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.Objects;
 
 @Document(collection = "affilation")
 public class Affiliation {
@@ -11,7 +12,6 @@ public class Affiliation {
     @Id
     private String id;
 
-    @DBRef
     @Field(value = "group")
     private Group group;
 
@@ -58,5 +58,20 @@ public class Affiliation {
                 ", group=" + group +
                 ", member=" + member +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Affiliation that = (Affiliation) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(group, that.group) &&
+                Objects.equals(member, that.member);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, group, member);
     }
 }

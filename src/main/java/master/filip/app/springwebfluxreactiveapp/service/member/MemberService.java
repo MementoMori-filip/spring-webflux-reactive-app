@@ -10,7 +10,7 @@ public interface MemberService {
 
     Mono<Member> getById(Member member);
 
-    Mono<Member> findMemberByNameAndSurname(Member member);
+    Flux<Member> findByNameAndSurname(String nameAndSurname);
 
     Mono<Member> saveOrUpdate(Member member);
 }

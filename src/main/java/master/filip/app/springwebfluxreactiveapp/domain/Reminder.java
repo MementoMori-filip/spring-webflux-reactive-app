@@ -1,11 +1,11 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Document(collection = "reminder")
 public class Reminder {
@@ -72,5 +72,21 @@ public class Reminder {
                 ", date=" + date +
                 ", member=" + member +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reminder reminder = (Reminder) o;
+        return Objects.equals(id, reminder.id) &&
+                Objects.equals(text, reminder.text) &&
+                Objects.equals(date, reminder.date) &&
+                Objects.equals(member, reminder.member);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, text, date, member);
     }
 }
