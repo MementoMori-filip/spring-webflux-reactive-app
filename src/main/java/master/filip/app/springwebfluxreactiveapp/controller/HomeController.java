@@ -15,7 +15,12 @@ public class HomeController {
     }
 
     @GetMapping("/login-page")
-    public String home(Model model){
+    public String login(Model model){
         return "login-page";
+    }
+
+    @GetMapping("/homepage")
+    public String homepage(Model model){
+        return "homepage";
     }
 }
