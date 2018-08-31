@@ -117,7 +117,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a th:href="@{/profile-page}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -166,7 +166,7 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/examples/login.html"><i class="fa fa-calendar-o"></i> Events</a></li>
+                        <li><a href="pages/examples/login.html"><i class="fa fa-calendar-o"></i>Events</a></li>
                     </ul>
                 </li>
             </ul>
@@ -182,7 +182,7 @@
                 Dashboard
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a th:href="@{/homepage}"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Dashboard</li>
             </ol>
         </section>

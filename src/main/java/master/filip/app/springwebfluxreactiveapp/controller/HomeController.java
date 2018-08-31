@@ -27,4 +27,7 @@ public class HomeController {
 
     @GetMapping("/registration")
     public String registration(Model model){ return "registration"; }
+
+    @GetMapping("/profile-page")
+    public String profilePage(Model model){ return "profile-page"; }
 }
