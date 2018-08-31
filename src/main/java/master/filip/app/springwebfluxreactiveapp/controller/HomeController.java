@@ -1,6 +1,7 @@
 package master.filip.app.springwebfluxreactiveapp.controller;
 
 import master.filip.app.springwebfluxreactiveapp.service.user.UserService;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,4 +24,7 @@ public class HomeController {
     public String homepage(Model model){
         return "homepage";
     }
+
+    @GetMapping("/registration")
+    public String registration(Model model){ return "registration"; }
 }
