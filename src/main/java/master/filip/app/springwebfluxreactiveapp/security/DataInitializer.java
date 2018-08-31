@@ -17,6 +17,8 @@ import java.util.UUID;
 public class DataInitializer implements CommandLineRunner {
 
     private static final UUID USER_IDENTIFIER = UUID.fromString("c47641ee-e63c-4c13-8cd2-1c2490aee0b3");
+    private static final UUID USER_IDENTIFIER1 = UUID.fromString("40c5ad0d-41f7-494b-8157-33fad16012aa");
+    private static final UUID USER_IDENTIFIER2 = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
     private static final UUID ADMIN_IDENTIFIER = UUID.fromString("0d2c04f1-e25f-41b5-b4cd-3566a081200f");
 
     private final UserRepository userRepository;
@@ -39,6 +41,18 @@ public class DataInitializer implements CommandLineRunner {
 
         userRepository.save(
                 new User(ADMIN_IDENTIFIER, "filip", passwordEncoder.encode("filip94"), "admin")
+        ).subscribe();
+
+        userRepository.save(
+                new User(USER_IDENTIFIER1, "dule", passwordEncoder.encode("dulesavic"), "user")
+        ).subscribe();
+
+        userRepository.save(
+                new User(USER_IDENTIFIER2, "milos", passwordEncoder.encode("mm"), "user")
+        ).subscribe();
+
+        userRepository.save(
+                new User(USER_IDENTIFIER, "nikola", passwordEncoder.encode("n94"), "user")
         ).subscribe();
 
         Flux<User> users = userRepository.findAll();
