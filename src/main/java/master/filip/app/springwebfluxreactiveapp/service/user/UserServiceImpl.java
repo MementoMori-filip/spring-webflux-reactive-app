@@ -28,10 +28,10 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
-    @Override
+/*    @Override
     public Mono<Boolean> isExists(User user) {
         return userRepository.existsById(user.getId());
-    }
+    }*/
 
     @Override
     public Mono<User> insert(User user) {
