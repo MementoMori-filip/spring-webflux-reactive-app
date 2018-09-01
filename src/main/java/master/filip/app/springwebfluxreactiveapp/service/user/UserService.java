@@ -16,6 +16,5 @@ public interface UserService {
 
     Mono<User> insert(User user);
 
-    //za testiranje
     Mono<User> getUserByUsername (String username);
 }

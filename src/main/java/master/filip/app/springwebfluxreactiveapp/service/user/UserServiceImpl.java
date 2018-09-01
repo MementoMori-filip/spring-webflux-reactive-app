@@ -3,11 +3,13 @@ package master.filip.app.springwebfluxreactiveapp.service.user;
 import master.filip.app.springwebfluxreactiveapp.domain.User;
 import master.filip.app.springwebfluxreactiveapp.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service("UserServiceImpl")
+@PreAuthorize("hasRole('ADMIN')")
 public class UserServiceImpl implements UserService{
 
     @Autowired
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.insert(user);
     }
 
+    @PreAuthorize("isAnonymous() or isAuthenticated()")
     @Override
     public Mono<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);

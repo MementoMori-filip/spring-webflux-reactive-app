@@ -4,6 +4,7 @@ import master.filip.app.springwebfluxreactiveapp.domain.Event;
 import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepository;
 import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -11,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.Date;
 
 @Service("EventServiceImpl")
+@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public class EventServiceImpl implements EventService{
 
     @Autowired
@@ -21,6 +23,7 @@ public class EventServiceImpl implements EventService{
         return eventRepository.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Mono<Event> getById(String id) {
         return eventRepository.findById(id);

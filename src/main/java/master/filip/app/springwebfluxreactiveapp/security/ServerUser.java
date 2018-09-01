@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class LibraryUser implements UserDetails {
+public class ServerUser implements UserDetails {
 
     private final User user;
 
-    public LibraryUser(User user) {
+    public ServerUser(User user) {
         this.user = user;
     }
 

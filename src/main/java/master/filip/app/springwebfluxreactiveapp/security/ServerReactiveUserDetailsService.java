@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class LibraryReactiveUserDetailsService implements ReactiveUserDetailsService {
+public class ServerReactiveUserDetailsService implements ReactiveUserDetailsService {
 
     private final UserService userService;
 
-    public LibraryReactiveUserDetailsService(UserService userService) {
+    public ServerReactiveUserDetailsService(UserService userService) {
         this.userService = userService;
     }
 
     @Override
     public Mono<UserDetails> findByUsername(String s) {
-        return userService.getUserByUsername(s).map(LibraryUser::new);
+        return userService.getUserByUsername(s).map(ServerUser::new);
     }
 }

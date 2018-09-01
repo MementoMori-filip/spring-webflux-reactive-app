@@ -1,6 +1,6 @@
 package master.filip.app.springwebfluxreactiveapp.config;
 
-import master.filip.app.springwebfluxreactiveapp.server.Role;
+import master.filip.app.springwebfluxreactiveapp.common.Role;
 import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -31,12 +31,13 @@ public class WebSecurityConfiguration {
         return http
                 .authorizeExchange()
                 .matchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .matchers(EndpointRequest.to("health")).permitAll()
-                .matchers(EndpointRequest.to("info")).permitAll()
+                .matchers(EndpointRequest.to("calendar")).permitAll()
+                .matchers(EndpointRequest.to("profile-page")).permitAll()
                 .matchers(EndpointRequest.toAnyEndpoint()).hasRole(Role.ADMIN.name())
-                .pathMatchers(HttpMethod.POST, "/books").hasRole(Role.USER.name())
-                .pathMatchers(HttpMethod.DELETE, "/books").hasRole(Role.USER.name())
+                .pathMatchers(HttpMethod.POST, "/registration").hasRole(Role.USER.name())
+                .pathMatchers(HttpMethod.DELETE, "/user").hasRole(Role.USER.name())
                 .pathMatchers("/users/**").hasRole(Role.ADMIN.name())
+                .pathMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
                 .anyExchange().authenticated()
                 .and()
                 .httpBasic().and().formLogin().and()

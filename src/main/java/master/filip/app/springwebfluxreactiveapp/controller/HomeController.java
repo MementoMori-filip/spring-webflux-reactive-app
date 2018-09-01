@@ -20,10 +20,13 @@ public class HomeController {
         return "login-page";
     }
 
-    @GetMapping("/homepage")
+    @GetMapping("/")
     public String homepage(Model model){
         return "homepage";
     }
+
+    @GetMapping("/admin/homepage-admin")
+    public String homepageAdmin(Model model){ return "homepage-admin"; }
 
     @GetMapping("/registration")
     public String registration(Model model){ return "registration"; }
