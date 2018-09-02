@@ -25,7 +25,6 @@ public class WebSecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    //izmeni stranice - homepage...
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
@@ -36,11 +35,13 @@ public class WebSecurityConfiguration {
                 .matchers(EndpointRequest.toAnyEndpoint()).hasRole(Role.ADMIN.name())
                 .pathMatchers(HttpMethod.POST, "/registration").hasRole(Role.USER.name())
                 .pathMatchers(HttpMethod.DELETE, "/user").hasRole(Role.USER.name())
-                .pathMatchers("/users/**").hasRole(Role.ADMIN.name())
                 .pathMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+                .pathMatchers("/login-page", "/registration", "/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
-                .httpBasic().and().formLogin().and()
+                .httpBasic().and()
+                .formLogin().loginPage("/login-page")
+                .and()
                 .logout().logoutSuccessHandler(logoutSuccessHandler())
                 .and()
                 .build();

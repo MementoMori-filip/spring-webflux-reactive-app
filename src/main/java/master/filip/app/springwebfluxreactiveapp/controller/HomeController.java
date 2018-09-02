@@ -22,7 +22,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String homepage(Model model){
-        return "homepage";
+        return "redirect:/homepage";
     }
 
     @GetMapping("/admin/homepage-admin")

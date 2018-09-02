@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,12 +14,15 @@ public class User {
     @Id
     private UUID id;
 
+    @NotEmpty(message = "This field is required")
     @Field("username")
     private String username;
 
+    @NotEmpty(message = "This field is required")
     @Field("password")
     private String password;
 
+    @NotEmpty(message = "This field is required")
     @Field("role")
     private String role;
 
