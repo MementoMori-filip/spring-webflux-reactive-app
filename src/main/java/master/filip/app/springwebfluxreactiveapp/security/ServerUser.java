@@ -7,7 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class ServerUser implements UserDetails {
+public class ServerUser  implements UserDetails{
+
 
     private final User user;
 

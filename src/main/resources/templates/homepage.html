@@ -107,12 +107,14 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
-                            <li class="user-header">
-                                <img src="dist/img/finaluser.png" class="img-circle" alt="User Image">
+                            <li th:if="${currentUser} == null">
+                                <!--<img src="dist/img/finaluser.png" class="img-circle" alt="User Image">-->
+                                <p> error </p>
+                            </li>
+                            <li class="user-header" th:if="${currentUser} != null">
+                                <!--<img src="dist/img/finaluser.png" class="img-circle" alt="User Image">-->
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                </p>
+                                <p th:text="${currentUser.name}"></p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -120,7 +122,10 @@
                                     <a th:href="@{/profile-page}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="http://localhost:8080/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <form th:action="@{/logout}" th:method="post">
+                                        <button class="btn btn-default btn-flat" type="submit">Log out</button>
+                                    </form>
+                                    <!--<a href="http://localhost:8080/logout" class="btn btn-default btn-flat">Sign out</a>-->
                                 </div>
                             </li>
                         </ul>

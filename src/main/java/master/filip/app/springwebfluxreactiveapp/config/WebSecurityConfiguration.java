@@ -36,7 +36,9 @@ public class WebSecurityConfiguration {
                 .pathMatchers(HttpMethod.POST, "/registration").hasRole(Role.USER.name())
                 .pathMatchers(HttpMethod.DELETE, "/user").hasRole(Role.USER.name())
                 .pathMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-                .pathMatchers("/login-page", "/registration", "/**").permitAll()
+                .pathMatchers("/user/**").hasAuthority(Role.USER.name())
+                .pathMatchers("/login-page", "/registration").permitAll()
+                .pathMatchers("/bower_components/**", "/build/**", "/dist/**", "/documentation/**", "/plugins/**", "/pages/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .httpBasic().and()
@@ -50,7 +52,7 @@ public class WebSecurityConfiguration {
     @Bean
     public ServerLogoutSuccessHandler logoutSuccessHandler() {
         RedirectServerLogoutSuccessHandler logoutSuccessHandler = new RedirectServerLogoutSuccessHandler();
-        logoutSuccessHandler.setLogoutSuccessUrl(URI.create("/login-page"));
+        logoutSuccessHandler.setLogoutSuccessUrl(URI.create("/login-page?logout"));
         return logoutSuccessHandler;
     }
 }

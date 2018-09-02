@@ -19,18 +19,23 @@ public class HomeController {
     public String login(Model model){
         return "login-page";
     }
-
+/*
     @GetMapping("/")
+    public String redirect(Model model) {
+        return "homepage";
+    }*/
+
+/*    @GetMapping("/user/homepage")
     public String homepage(Model model){
-        return "redirect:/homepage";
+        return "homepage";
     }
 
     @GetMapping("/admin/homepage-admin")
-    public String homepageAdmin(Model model){ return "homepage-admin"; }
+    public String homepageAdmin(Model model){ return "homepage-admin"; }*/
 
     @GetMapping("/registration")
     public String registration(Model model){ return "registration"; }
 
-    @GetMapping("/profile-page")
+    @GetMapping("/user/profile-page")
     public String profilePage(Model model){ return "profile-page"; }
 }
