@@ -109,12 +109,19 @@
                             <!-- User image -->
                             <li th:if="${currentUser} == null">
                                 <!--<img src="dist/img/finaluser.png" class="img-circle" alt="User Image">-->
-                                <p> error </p>
+                                <a class="nav-link" th:href="@{/signup}">Sign Up</a>
                             </li>
                             <li class="user-header" th:if="${currentUser} != null">
                                 <!--<img src="dist/img/finaluser.png" class="img-circle" alt="User Image">-->
-
-                                <p th:text="${currentUser.name}"></p>
+                                <a href="#"
+                                   class="dropdown-toggle nav-link"
+                                   data-toggle="dropdown"
+                                   role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                   th:text="${currentUser.username}">Dropdown <span class="caret"></span>
+                                </a>
+                                <p th:text="${currentUser.username}"></p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">

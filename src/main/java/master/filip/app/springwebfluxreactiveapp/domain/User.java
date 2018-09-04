@@ -36,8 +36,12 @@ public class User {
         this.role = role;
     }
 
+    public User(User user) {
+        this(user.getId(), user.getUsername(), user.getPassword(), user.getRole());
+    }
+
     public UUID getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(UUID id) {
@@ -45,7 +49,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -53,7 +57,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -61,7 +65,7 @@ public class User {
     }
 
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(String role) {
