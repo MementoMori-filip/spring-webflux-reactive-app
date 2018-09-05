@@ -1,6 +1,7 @@
 package master.filip.app.springwebfluxreactiveapp.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,9 +19,11 @@ public class Member {
     @Field(value = "email")
     private String email;
 
+    @DBRef
     @Field(value = "company")
     private Company company;
 
+    @DBRef
     @Field(value = "user")
     private User user;
 

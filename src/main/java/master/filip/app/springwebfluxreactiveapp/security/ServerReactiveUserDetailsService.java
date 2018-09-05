@@ -35,10 +35,9 @@ public class ServerReactiveUserDetailsService  implements ReactiveUserDetailsSer
             return AuthorityUtils.createAuthorityList("user", "admin");
         }
 
-        //promeni ovaj getPassword()
         @Override
         public String getUsername() {
-            return getPassword();
+            return getUserUsername();
         }
 
         @Override

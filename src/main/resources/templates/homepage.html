@@ -103,7 +103,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="dist/img/finaluser.png" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs"><b th:text="${currentUser.username}"></b></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -112,7 +112,7 @@
                                 <a class="nav-link" th:href="@{/signup}">Sign Up</a>
                             </li>
                             <li class="user-header" th:if="${currentUser} != null">
-                                <!--<img src="dist/img/finaluser.png" class="img-circle" alt="User Image">-->
+                                <img src="dist/img/finaluser.png" class="img-circle" alt="User Image">
                                 <a href="#"
                                    class="dropdown-toggle nav-link"
                                    data-toggle="dropdown"
@@ -121,7 +121,7 @@
                                    aria-expanded="false"
                                    th:text="${currentUser.username}">Dropdown <span class="caret"></span>
                                 </a>
-                                <p th:text="${currentUser.username}"></p>
+                                <!--<p th:text="${currentUser.username}"></p>-->
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -152,7 +152,7 @@
                     <img src="dist/img/finaluser.png" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p><span class="hidden-xs"><b th:text="${currentUser.username}"></b></span></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>

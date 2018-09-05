@@ -1,6 +1,7 @@
 package master.filip.app.springwebfluxreactiveapp.service.member;
 
 import master.filip.app.springwebfluxreactiveapp.domain.Member;
+import master.filip.app.springwebfluxreactiveapp.domain.User;
 import master.filip.app.springwebfluxreactiveapp.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,10 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Mono<Member> saveOrUpdate(Member member) {
         return memberRepository.save(member);
+    }
+
+    @Override
+    public Mono<Member> getByUser(User user) {
+        return memberRepository.findByUser(user.getId());
     }
 }

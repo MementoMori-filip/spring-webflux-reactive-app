@@ -12,8 +12,6 @@ public interface UserService {
 
     Mono<User> saveOrUpdate(User user);
 
-/*    Mono<Boolean> isExists(User user);*/
-
     Mono<User> insert(User user);
 
     Mono<User> getUserByUsername (String username);
