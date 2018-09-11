@@ -19,11 +19,9 @@ public class Member {
     @Field(value = "email")
     private String email;
 
-    @DBRef
     @Field(value = "company")
     private Company company;
 
-    @DBRef
     @Field(value = "user")
     private User user;
 

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service("MemberServiceImpl")
 public class MemberServiceImpl implements MemberService{
 
@@ -38,5 +40,10 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Mono<Member> getByUser(User user) {
         return memberRepository.findByUser(user.getId());
+    }
+
+    @Override
+    public Mono<Member> getByUserUuid(UUID uuid) {
+        return memberRepository.findByUser(uuid);
     }
 }
