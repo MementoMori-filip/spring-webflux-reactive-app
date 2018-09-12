@@ -5,14 +5,18 @@ import org.springframework.boot.actuate.autoconfigure.security.reactive.Endpoint
 import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
+import org.springframework.security.web.server.authorization.AuthorizationContext;
+import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
@@ -29,24 +33,27 @@ public class WebSecurityConfiguration {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
                 .authorizeExchange()
-                .matchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .matchers(EndpointRequest.to("calendar")).permitAll()
-                .matchers(EndpointRequest.to("profile-page")).permitAll()
-                .matchers(EndpointRequest.toAnyEndpoint()).hasRole(Role.ADMIN.name())
-                .pathMatchers(HttpMethod.POST, "/registration").hasRole(Role.USER.name())
-                .pathMatchers(HttpMethod.DELETE, "/user").hasRole(Role.USER.name())
-                .pathMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-                .pathMatchers("/user/**").hasAuthority(Role.USER.name())
-                .pathMatchers("/login-page", "/registration").permitAll()
-                .pathMatchers("/bower_components/**", "/build/**", "/dist/**", "/documentation/**", "/plugins/**", "/pages/**").permitAll()
-                .anyExchange().authenticated()
-                .and()
+                    .matchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                    .pathMatchers("/login-page", "/registration").permitAll()
+                    .pathMatchers("/all-users").access(this::isFilip)
+                    .pathMatchers("/bower_components/**", "/build/**", "/dist/**", "/documentation/**", "/plugins/**", "/pages/**").permitAll()
+                    .anyExchange().authenticated()
+                    .and()
                 .httpBasic().and()
-                .formLogin().loginPage("/login-page")
-                .and()
-                .logout().logoutSuccessHandler(logoutSuccessHandler())
-                .and()
+                .formLogin()
+                    .loginPage("/login-page").and()
+                .logout()
+                    .logoutSuccessHandler(logoutSuccessHandler()).and()
                 .build();
+    }
+
+    private Mono<AuthorizationDecision> isFilip(Mono<Authentication> authenticationMono,
+                                                AuthorizationContext authorizationContext) {
+
+        return authenticationMono
+                .map(Authentication::getName)
+                .map(username -> username.equals("filip"))
+                .map(AuthorizationDecision::new);
     }
 
     @Bean

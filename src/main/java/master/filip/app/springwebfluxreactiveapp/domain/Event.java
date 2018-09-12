@@ -25,6 +25,9 @@ public class Event {
     @Field(value = "dateTo")
     private Date dateTo;
 
+    @Field(value = "location")
+    private String location;
+
     @Field(value = "styleOfEvent")
     private StyleOfEvent styleOfEvent;
 
@@ -34,12 +37,13 @@ public class Event {
     public Event() {
     }
 
-    public Event(String id, String nameOfEvent, String description, Date dateFrom, Date dateTo, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent) {
+    public Event(String id, String nameOfEvent, String description, Date dateFrom, Date dateTo, String location, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent) {
         this.id = id;
         this.nameOfEvent = nameOfEvent;
         this.description = description;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
+        this.location = location;
         this.styleOfEvent = styleOfEvent;
         this.typeOfEvent = typeOfEvent;
     }
@@ -84,6 +88,14 @@ public class Event {
         this.dateTo = dateTo;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public StyleOfEvent getStyleOfEvent() {
         return styleOfEvent;
     }
@@ -108,6 +120,7 @@ public class Event {
                 ", description='" + description + '\'' +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
+                ", location='" + location + '\'' +
                 ", styleOfEvent=" + styleOfEvent +
                 ", typeOfEvent=" + typeOfEvent +
                 '}';
@@ -123,12 +136,13 @@ public class Event {
                 Objects.equals(description, event.description) &&
                 Objects.equals(dateFrom, event.dateFrom) &&
                 Objects.equals(dateTo, event.dateTo) &&
+                Objects.equals(location, event.location) &&
                 Objects.equals(styleOfEvent, event.styleOfEvent) &&
                 Objects.equals(typeOfEvent, event.typeOfEvent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nameOfEvent, description, dateFrom, dateTo, styleOfEvent, typeOfEvent);
+        return Objects.hash(id, nameOfEvent, description, dateFrom, dateTo, location, styleOfEvent, typeOfEvent);
     }
 }
