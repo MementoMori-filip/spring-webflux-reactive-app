@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "company")
@@ -18,13 +19,21 @@ public class Company {
     @Field(value = "address")
     private String address;
 
+    @Field(value = "members")
+    private List<Member> listOfMembers;
+
+    @Field(value = "groups")
+    private List<Group> listOfGroups;
+
     public Company() {
     }
 
-    public Company(String id, String name, String address) {
+    public Company(String id, String name, String address, List<Member> listOfMembers, List<Group> listOfGroups) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.listOfMembers = listOfMembers;
+        this.listOfGroups = listOfGroups;
     }
 
     public String getId() {
@@ -51,12 +60,30 @@ public class Company {
         this.address = address;
     }
 
+    public List<Member> getListOfMembers() {
+        return listOfMembers;
+    }
+
+    public void setListOfMembers(List<Member> listOfMembers) {
+        this.listOfMembers = listOfMembers;
+    }
+
+    public List<Group> getListOfGroups() {
+        return listOfGroups;
+    }
+
+    public void setListOfGroups(List<Group> listOfGroups) {
+        this.listOfGroups = listOfGroups;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", listOfMembers=" + listOfMembers +
+                ", listOfGroups=" + listOfGroups +
                 '}';
     }
 
@@ -67,11 +94,13 @@ public class Company {
         Company company = (Company) o;
         return Objects.equals(id, company.id) &&
                 Objects.equals(name, company.name) &&
-                Objects.equals(address, company.address);
+                Objects.equals(address, company.address) &&
+                Objects.equals(listOfMembers, company.listOfMembers) &&
+                Objects.equals(listOfGroups, company.listOfGroups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, address);
+        return Objects.hash(id, name, address, listOfMembers, listOfGroups);
     }
 }

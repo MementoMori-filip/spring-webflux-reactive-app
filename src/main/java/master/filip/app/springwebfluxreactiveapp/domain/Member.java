@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "member")
@@ -25,15 +26,27 @@ public class Member {
     @Field(value = "user")
     private User user;
 
+    @Field(value = "groups")
+    private List<Group> isMemberOfGroups;
+
+    @Field(value = "followedevents")
+    private List<Event> listOfFollowedEvents;
+
+    @Field(value = "createdevents")
+    private List<Event> listOfCreatedEvents;
+
     public Member() {
     }
 
-    public Member(String id, String nameAndSurname, String email, Company company, User user) {
+    public Member(String id, String nameAndSurname, String email, Company company, User user, List<Group> isMemberOfGroups, List<Event> listOfFollowedEvents, List<Event> listOfCreatedEvents) {
         this.id = id;
         this.nameAndSurname = nameAndSurname;
         this.email = email;
         this.company = company;
         this.user = user;
+        this.isMemberOfGroups = isMemberOfGroups;
+        this.listOfFollowedEvents = listOfFollowedEvents;
+        this.listOfCreatedEvents = listOfCreatedEvents;
     }
 
     public String getId() {
@@ -76,6 +89,30 @@ public class Member {
         this.user = user;
     }
 
+    public List<Group> getIsMemberOfGroups() {
+        return isMemberOfGroups;
+    }
+
+    public void setIsMemberOfGroups(List<Group> isMemberOfGroups) {
+        this.isMemberOfGroups = isMemberOfGroups;
+    }
+
+    public List<Event> getListOfFollowedEvents() {
+        return listOfFollowedEvents;
+    }
+
+    public void setListOfFollowedEvents(List<Event> listOfFollowedEvents) {
+        this.listOfFollowedEvents = listOfFollowedEvents;
+    }
+
+    public List<Event> getListOfCreatedEvents() {
+        return listOfCreatedEvents;
+    }
+
+    public void setListOfCreatedEvents(List<Event> listOfCreatedEvents) {
+        this.listOfCreatedEvents = listOfCreatedEvents;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -84,6 +121,9 @@ public class Member {
                 ", email='" + email + '\'' +
                 ", company=" + company +
                 ", user=" + user +
+                ", isMemberOfGroups=" + isMemberOfGroups +
+                ", listOfFollowedEvents=" + listOfFollowedEvents +
+                ", listOfCreatedEvents=" + listOfCreatedEvents +
                 '}';
     }
 
@@ -96,11 +136,14 @@ public class Member {
                 Objects.equals(nameAndSurname, member.nameAndSurname) &&
                 Objects.equals(email, member.email) &&
                 Objects.equals(company, member.company) &&
-                Objects.equals(user, member.user);
+                Objects.equals(user, member.user) &&
+                Objects.equals(isMemberOfGroups, member.isMemberOfGroups) &&
+                Objects.equals(listOfFollowedEvents, member.listOfFollowedEvents) &&
+                Objects.equals(listOfCreatedEvents, member.listOfCreatedEvents);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nameAndSurname, email, company, user);
+        return Objects.hash(id, nameAndSurname, email, company, user, isMemberOfGroups, listOfFollowedEvents, listOfCreatedEvents);
     }
 }
