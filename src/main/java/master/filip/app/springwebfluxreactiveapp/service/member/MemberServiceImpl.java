@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.save(member);
     }
 
-    @Override
+/*    @Override
     public Mono<Member> getByUser(User user) {
         return memberRepository.findByUser(user.getId());
     }
@@ -45,5 +45,5 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Mono<Member> getByUserUuid(UUID uuid) {
         return memberRepository.findByUser(uuid);
-    }
+    }*/
 }

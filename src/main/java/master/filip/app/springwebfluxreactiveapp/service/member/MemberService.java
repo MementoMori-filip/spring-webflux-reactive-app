@@ -17,7 +17,7 @@ public interface MemberService {
 
     Mono<Member> saveOrUpdate(Member member);
 
-    Mono<Member> getByUser(User user);
+/*    Mono<Member> getByUser(User user);
 
-    Mono<Member> getByUserUuid(UUID uuid);
+    Mono<Member> getByUserUuid(UUID uuid);*/
 }

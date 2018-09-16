@@ -16,20 +16,16 @@ public class Group {
     @Field(value = "nameOfGroup")
     private String nameOfGroup;
 
-    @Field(value = "members")
-    private List<Member> hasMembers;
-
-    @Field(value = "company")
-    private Company company;
-
     public Group() {
     }
 
-    public Group(String id, String nameOfGroup, List<Member> hasMembers, Company company) {
+    public Group(String id, String nameOfGroup) {
         this.id = id;
         this.nameOfGroup = nameOfGroup;
-        this.hasMembers = hasMembers;
-        this.company = company;
+    }
+
+    public Group(String nameOfGroup) {
+        this.nameOfGroup = nameOfGroup;
     }
 
     public String getId() {
@@ -48,29 +44,11 @@ public class Group {
         this.nameOfGroup = nameOfGroup;
     }
 
-    public List<Member> getHasMembers() {
-        return hasMembers;
-    }
-
-    public void setHasMembers(List<Member> hasMembers) {
-        this.hasMembers = hasMembers;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
     @Override
     public String toString() {
         return "Group{" +
                 "id='" + id + '\'' +
                 ", nameOfGroup='" + nameOfGroup + '\'' +
-                ", hasMembers=" + hasMembers +
-                ", company=" + company +
                 '}';
     }
 
@@ -80,13 +58,11 @@ public class Group {
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
         return Objects.equals(id, group.id) &&
-                Objects.equals(nameOfGroup, group.nameOfGroup) &&
-                Objects.equals(hasMembers, group.hasMembers) &&
-                Objects.equals(company, group.company);
+                Objects.equals(nameOfGroup, group.nameOfGroup);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nameOfGroup, hasMembers, company);
+        return Objects.hash(id, nameOfGroup);
     }
 }

@@ -23,6 +23,10 @@ public class TypeOfEvent {
         this.nameOfType = nameOfType;
     }
 
+    public TypeOfEvent(String nameOfType) {
+        this.nameOfType = nameOfType;
+    }
+
     public String getId() {
         return id;
     }

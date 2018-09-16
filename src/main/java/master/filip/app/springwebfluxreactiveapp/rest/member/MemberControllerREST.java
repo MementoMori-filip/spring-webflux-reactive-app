@@ -22,10 +22,11 @@ public class MemberControllerREST {
 
     @GetMapping(path = "/member/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Mono<Member> getMemberByUser(@PathVariable UUID uuid){
-        return (Mono<Member>) memberService.getByUserUuid(uuid);
+        /*return (Mono<Member>) memberService.getByUserUuid(uuid);*/
+        return null;
     }
 
-    @GetMapping("/findAll")
+    @GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<Member> findAllMembers(){
         return memberService.listAll();
     }

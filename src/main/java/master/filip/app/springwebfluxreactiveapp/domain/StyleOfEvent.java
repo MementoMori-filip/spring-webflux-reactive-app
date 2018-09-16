@@ -23,6 +23,10 @@ public class StyleOfEvent {
         this.nameOfStyle = nameOfStyle;
     }
 
+    public StyleOfEvent(String nameOfStyle) {
+        this.nameOfStyle = nameOfStyle;
+    }
+
     public String getId() {
         return id;
     }

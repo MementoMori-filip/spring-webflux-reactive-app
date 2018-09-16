@@ -38,13 +38,10 @@ public class Event {
     @Field(value = "members")
     private List<Member> listOfFollowers;
 
-    @Field(value = "creator")
-    private Member member;
-
     public Event() {
     }
 
-    public Event(String id, String nameOfEvent, String description, Date dateFrom, Date dateTo, String location, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent, List<Member> listOfFollowers, Member member) {
+    public Event(String id, String nameOfEvent, String description, Date dateFrom, Date dateTo, String location, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent, List<Member> listOfFollowers) {
         this.id = id;
         this.nameOfEvent = nameOfEvent;
         this.description = description;
@@ -54,7 +51,17 @@ public class Event {
         this.styleOfEvent = styleOfEvent;
         this.typeOfEvent = typeOfEvent;
         this.listOfFollowers = listOfFollowers;
-        this.member = member;
+    }
+
+    public Event(String nameOfEvent, String description, Date dateFrom, Date dateTo, String location, StyleOfEvent styleOfEvent, TypeOfEvent typeOfEvent, List<Member> listOfFollowers) {
+        this.nameOfEvent = nameOfEvent;
+        this.description = description;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.location = location;
+        this.styleOfEvent = styleOfEvent;
+        this.typeOfEvent = typeOfEvent;
+        this.listOfFollowers = listOfFollowers;
     }
 
     public String getId() {
@@ -129,14 +136,6 @@ public class Event {
         this.listOfFollowers = listOfFollowers;
     }
 
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
-    }
-
     @Override
     public String toString() {
         return "Event{" +
@@ -149,7 +148,6 @@ public class Event {
                 ", styleOfEvent=" + styleOfEvent +
                 ", typeOfEvent=" + typeOfEvent +
                 ", listOfFollowers=" + listOfFollowers +
-                ", member=" + member +
                 '}';
     }
 
@@ -166,12 +164,11 @@ public class Event {
                 Objects.equals(location, event.location) &&
                 Objects.equals(styleOfEvent, event.styleOfEvent) &&
                 Objects.equals(typeOfEvent, event.typeOfEvent) &&
-                Objects.equals(listOfFollowers, event.listOfFollowers) &&
-                Objects.equals(member, event.member);
+                Objects.equals(listOfFollowers, event.listOfFollowers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nameOfEvent, description, dateFrom, dateTo, location, styleOfEvent, typeOfEvent, listOfFollowers, member);
+        return Objects.hash(id, nameOfEvent, description, dateFrom, dateTo, location, styleOfEvent, typeOfEvent, listOfFollowers);
     }
 }

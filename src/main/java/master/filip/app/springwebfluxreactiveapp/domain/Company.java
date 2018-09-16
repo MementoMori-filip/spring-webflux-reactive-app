@@ -19,20 +19,22 @@ public class Company {
     @Field(value = "address")
     private String address;
 
-    @Field(value = "members")
-    private List<Member> listOfMembers;
-
     @Field(value = "groups")
     private List<Group> listOfGroups;
 
     public Company() {
     }
 
-    public Company(String id, String name, String address, List<Member> listOfMembers, List<Group> listOfGroups) {
+    public Company(String id, String name, String address, List<Group> listOfGroups) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.listOfMembers = listOfMembers;
+        this.listOfGroups = listOfGroups;
+    }
+
+    public Company(String name, String address, List<Group> listOfGroups) {
+        this.name = name;
+        this.address = address;
         this.listOfGroups = listOfGroups;
     }
 
@@ -60,14 +62,6 @@ public class Company {
         this.address = address;
     }
 
-    public List<Member> getListOfMembers() {
-        return listOfMembers;
-    }
-
-    public void setListOfMembers(List<Member> listOfMembers) {
-        this.listOfMembers = listOfMembers;
-    }
-
     public List<Group> getListOfGroups() {
         return listOfGroups;
     }
@@ -82,7 +76,6 @@ public class Company {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", listOfMembers=" + listOfMembers +
                 ", listOfGroups=" + listOfGroups +
                 '}';
     }
@@ -95,12 +88,11 @@ public class Company {
         return Objects.equals(id, company.id) &&
                 Objects.equals(name, company.name) &&
                 Objects.equals(address, company.address) &&
-                Objects.equals(listOfMembers, company.listOfMembers) &&
                 Objects.equals(listOfGroups, company.listOfGroups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, address, listOfMembers, listOfGroups);
+        return Objects.hash(id, name, address, listOfGroups);
     }
 }
