@@ -34,7 +34,7 @@ public class WebSecurityConfiguration {
         return http
                 .authorizeExchange()
                     .matchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                    .pathMatchers("/login-page", "/registration").permitAll()
+                    .pathMatchers("/login-page", "/registration", "/calendar").permitAll()
                     .pathMatchers("/all-users").access(this::isFilip)
                     .pathMatchers("/bower_components/**", "/build/**", "/dist/**", "/documentation/**", "/plugins/**", "/pages/**").permitAll()
                     .anyExchange().authenticated()

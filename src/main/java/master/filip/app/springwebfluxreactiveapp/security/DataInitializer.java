@@ -53,9 +53,9 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         createUsers();
-        createTypeOfEvents();
+/*        createTypeOfEvents();
         createStyleOfEvents();
-        createMain();
+        createMain();*/
     }
 
     private void createUsers() {

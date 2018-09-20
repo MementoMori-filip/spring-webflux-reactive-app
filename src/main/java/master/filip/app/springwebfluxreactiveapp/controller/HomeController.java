@@ -21,7 +21,4 @@ public class HomeController {
 
     @GetMapping("/registration")
     public String registration(Model model){ return "registration"; }
-
-    @GetMapping("/calendar")
-    public String calendar(Model model){ return "calendar"; }
 }
