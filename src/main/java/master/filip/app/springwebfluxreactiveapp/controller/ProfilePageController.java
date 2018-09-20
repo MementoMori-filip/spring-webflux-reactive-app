@@ -8,6 +8,7 @@ import master.filip.app.springwebfluxreactiveapp.security.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Controller
@@ -25,8 +26,11 @@ public class ProfilePageController {
     @GetMapping("/profile-page")
     public String profilePage(final Model model, @CurrentUser User user){
 
-        /*final Mono<Member> specificMember = this.memberCustomRepository.findSpecificMember(user.getId());*/
-        final Mono<Member> specificMember = this.memberRepository.findByUser(user);
+
+        final Mono<Member> specificMember = this.memberRepository.findByUser_Username(user.getUsername());
+
+        /*final Mono<Member> specificMember = this.memberCustomRepository.findSpecificMember(user.getUsername());*/
+
         model.addAttribute("member", specificMember);
 
         return "profile-page";

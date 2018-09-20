@@ -140,7 +140,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a th:href="@{/homepage}"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li class="active">Profile page</li>
             </ol>
         </section>
 
@@ -154,35 +154,14 @@
 
                     <h3 class="profile-username text-center"><i th:text="${member.nameAndSurname}"></i></h3>
 
-                    <p class="text-muted text-center">Username<b th:text="${currentUser.username}"></b></p>
+                    <p class="text-muted text-center">Username: <b th:text="${currentUser.username}"></b></p>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Email</b> <a class="pull-right"><i th:text="${member.email}"></i></a>
                         </li>
                         <li class="list-group-item">
-                            <b>Company name</b> <a class="pull-right"><i th:text="${member.company.name}"></i></a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Company address</b> <a class="pull-right"><i th:text="${member.company.address}"></i></a>
-                        </li>
-<!--                        <li class="list-group-item">
-                            &lt;!&ndash;<b>Groups:</b> <a class="pull-right"><i th:text="${member.isMemberOfGroups.nameOfGroup}"></i></a>&ndash;&gt;
-                        <div class="box-body">
-                            <table id="allUsers" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Group name</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="result" data-th-each="groupdInfo : ${member.isMemberOfGroups}">
-                                    <td class="teamA">[[${groupdInfo.nameOfGroup}]]</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        </li>-->
+
                     </ul>
                 </div>
                 <!-- /.box-body -->
