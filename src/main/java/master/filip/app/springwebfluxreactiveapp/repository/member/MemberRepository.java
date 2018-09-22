@@ -11,5 +11,6 @@ import java.util.UUID;
 
 public interface MemberRepository extends ReactiveMongoRepository<Member, String> {
 
+    @Query
     Mono<Member> findByUser_Username(String username);
 }

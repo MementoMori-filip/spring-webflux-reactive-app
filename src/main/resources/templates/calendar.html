@@ -9,7 +9,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
     <!-- Font Awesome -->
     <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
     <!-- Ionicons -->
@@ -22,8 +21,15 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/dist/css/skins/_all-skins.min.css}">
 
+    <!--fullcalendar-->
+    <link rel="stylesheet" th:href="@{/bower_components/fullcalendar/dist/fullcalendar.min.css}">
+    <link rel="stylesheet" th:href="@{/bower_components/fullcalendar/dist/fullcalendar.print.min.css}" media="print">
+
     <!-- css for calendar -->
     <link rel="stylesheet" th:href="@{/dist/css/AdminLTE.min.css}">
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -279,6 +285,40 @@
             Ivanovic</a>.</strong>
     </footer>
 
+    <div id="eventCalendar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Please provide additional info</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label for="calendar-event-name">Event name</label>
+                        <input type="text" id="calendar-event-name">
+                    </div>
+                    <div>
+                        <select name="calendar-event-style" id="calendar-event-style">
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select name="calendar-event-type" id="calendar-event-type">
+                            <option value="holiday">Holiday</option>
+                            <option value="conference">Conference</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-new-event">Add event</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <!-- ./wrapper -->
 
@@ -299,10 +339,135 @@
 <script th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 <!-- ChartJS -->
 <script th:src="@{/bower_components/chart.js/Chart.js}"></script>
+<!-- fullCalendar -->
+<script th:src="@{/bower_components/moment/moment.js}"></script>
+<script th:src="@{/bower_components/fullcalendar/dist/fullcalendar.min.js}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script th:src="@{/dist/js/pages/dashboard2.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/dist/js/demo.js}"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var allEvents = /*[[${allEvents}]]*/ 'default';
+
+    /*]]>*/
+</script>
+<script>
+    var $calendar;
+    var calendarEvents;
+    var $t;
+    var $n;
+    var $token = $("meta[name='_csrf']").attr("content");
+    var $header = $("meta[name='_csrf_header']").attr("content");
+
+    function getColorOfEvent(styleOfEvent) {
+        if (styleOfEvent.nameOfStyle === 'public') return 'green';
+        if (styleOfEvent.nameOfStyle === 'company\'s') return 'orange';
+        if (styleOfEvent.nameOfStyle === 'private') return 'red';
+
+        return 'blue';
+    }
+
+    function saveCalendarEvent() {
+        var event_title = $("#calendar-event-name").val()
+        //u slucaju da ajax radi zakomentari to
+        var a = {
+            title: event_title,
+            start: $t,
+            end: $n
+        }
+        $calendar.fullCalendar("renderEvent", a, !0)
+        $calendar.fullCalendar("unselect")
+        $("#calendar-event-name").val('')
+        $('#eventCalendar').modal('hide')
+        // dovde
+
+        var event = {
+            nameOfEvent: event_title,
+            styleOfEvent: {
+                id: null,
+                nameOfStyle: $('#calendar-event-style').val()
+            },
+            typeOfEvent: {
+                id: null,
+                nameOfType: $('#calendar-event-type').val()
+            },
+            dateFrom: $t,
+            dateTo: $n
+        }
+
+        $.ajax({
+            url: "/calendar/save",
+            method: 'POST',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader($header, $token);
+            },
+            xhrFields: {withCredentials: true},
+            async: true,
+            contentType: "application/json",
+            data: JSON.stringify(event),
+            dataType: "json"
+        }).then(function (data, textStatus, xhr) {
+            console.log(data)
+            //u slucaju da radi ajax otkomentarisati
+            // var a = {
+            //     title: event_title,
+            //     start: $t,
+            //     end: $n
+            // }
+            // $calendar.fullCalendar("renderEvent", a, !0)
+            // $calendar.fullCalendar("unselect")
+            // $("#calendar-event-name").val('')
+            // $('#eventCalendar').modal('hide')
+        })
+    }
+
+    $('#save-new-event').click(function () {
+        saveCalendarEvent()
+    })
+
+    $(document).ready(function () {
+
+        console.log(allEvents)
+
+
+        calendarEvents = allEvents.map(function (el) {
+            return {
+                title: el.nameOfEvent,
+                start: new Date(el.dateFrom),
+                end: new Date(el.dateTo),
+                backgroundColor: getColorOfEvent(el.styleOfEvent),
+                borderColor: getColorOfEvent(el.styleOfEvent) //red
+            }
+        })
+
+        $calendar = $('#calendar').fullCalendar({
+            header    : {
+                left  : 'prev,next today',
+                center: 'title',
+                right : 'month,agendaWeek,agendaDay'
+            },
+            buttonText: {
+                today: 'danas',
+                month: 'mesec',
+                week : 'nedelja',
+                day  : 'noc'
+            },
+            events: calendarEvents,
+            editable  : true,
+            droppable : true,
+            selectable: true,
+
+            select: function(t, n) {
+                $('#eventCalendar').modal()
+                $t = t
+                $n = n
+            }
+        })
+    })
+</script>
 </body>
 
 </html>
