@@ -1,5 +1,6 @@
 package master.filip.app.springwebfluxreactiveapp.controller;
 
+import master.filip.app.springwebfluxreactiveapp.domain.Company;
 import master.filip.app.springwebfluxreactiveapp.domain.Member;
 import master.filip.app.springwebfluxreactiveapp.domain.User;
 import master.filip.app.springwebfluxreactiveapp.repository.member.MemberCustomRepository;
@@ -29,7 +30,7 @@ public class ProfilePageController {
 
         final Mono<Member> specificMember = this.memberRepository.findByUser_Username(user.getUsername());
 
-        /*final Mono<Member> specificMember = this.memberCustomRepository.findSpecificMember(user.getUsername());*/
+        final Mono<Member> currentMember = this.memberCustomRepository.convertSpecificMember(specificMember);
 
         model.addAttribute("member", specificMember);
 

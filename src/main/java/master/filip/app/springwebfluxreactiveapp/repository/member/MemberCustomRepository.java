@@ -25,11 +25,8 @@ public class MemberCustomRepository {
         this.eventRepository = eventRepository;
     }
 
-    public Mono<Member> findSpecificMember(String id) {
-
-        final Flux<Company> listOfCompanies = companyRepository.findAll();
+    public Mono<Member> convertSpecificMember(Mono<Member> specificMember) {
         return null;
-
     }
 
     static class MemberAggregator{
@@ -40,8 +37,6 @@ public class MemberCustomRepository {
         private final User user;
         private final Group group;
         private final Company company;
-        private List<Event> listOfFollowedEvents;
-        private List<Event> listOfCreatedEvents;
 
         MemberAggregator(final User user, final Group group, final Company company) {
             super();
@@ -51,9 +46,6 @@ public class MemberCustomRepository {
             this.user = user;
             this.group = group;
             this.company = company;
-            this.listOfCreatedEvents = new ArrayList<>();
-            this.listOfFollowedEvents = new ArrayList<>();
-
         }
     }
 }
