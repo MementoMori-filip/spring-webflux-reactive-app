@@ -67,8 +67,8 @@ public class DataInitializer implements CommandLineRunner {
 /*      createTypeOfEvents();
         createStyleOfEvents();
         createMain();*/
-/*        createEventCustom();
-        createMemberCustom();*/
+        createEventCustom();
+        /*createMemberCustom();*/
     }
 
     private void createMemberCustom() {
@@ -121,9 +121,8 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createEventCustom() {
-
-        Date e1dateFrom = parseDate("2018-09-28");
-        Date e1dateTo = parseDate("2018-09-28");
+        Date e1dateFrom = parseDate("2018-09-28 15:00:00");
+        Date e1dateTo = parseDate("2018-09-28 17:30:00");
 
         EventCustom e1 = new EventCustom(
                 "Odbrana master rada",
@@ -136,8 +135,8 @@ public class DataInitializer implements CommandLineRunner {
                 "filip"
         );
 
-        Date e2dateFrom = parseDate("2018-09-20");
-        Date e2dateTo = parseDate("2018-09-24");
+        Date e2dateFrom = parseDate("2018-09-24 10:00:00");
+        Date e2dateTo = parseDate("2018-09-24 18:45:00");
 
         EventCustom e2 = new EventCustom(
                 "JMS i Spring 5",
@@ -150,8 +149,8 @@ public class DataInitializer implements CommandLineRunner {
                 "nikola"
         );
 
-        Date e3dateFrom = parseDate("2018-09-25");
-        Date e3dateTo = parseDate("2018-09-27");
+        Date e3dateFrom = parseDate("2018-09-24 15:00:00");
+        Date e3dateTo = parseDate("2018-09-24 21:00:00");
 
         EventCustom e3 = new EventCustom(
                 "Spring 5 in Nutshell",
@@ -164,8 +163,8 @@ public class DataInitializer implements CommandLineRunner {
                 "dule"
         );
 
-        Date e4dateFrom = parseDate("2018-09-24");
-        Date e4dateTo = parseDate("2018-09-30");
+        Date e4dateFrom = parseDate("2018-09-25 10:30:00");
+        Date e4dateTo = parseDate("2018-09-27 12:30:00");
 
         EventCustom e4 = new EventCustom(
                 "Testiranje i kvalitet softvera",
@@ -184,7 +183,7 @@ public class DataInitializer implements CommandLineRunner {
 
     public static Date parseDate(String date) {
         try {
-            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(date);
         } catch (ParseException e) {
             return null;
         }
