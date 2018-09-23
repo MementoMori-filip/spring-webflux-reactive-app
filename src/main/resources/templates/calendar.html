@@ -152,6 +152,28 @@
                 <li class="active">Calendar</li>
             </ol>
         </section>
+        <br/>
+    <div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h4 class="box-title">Legend:</h4>
+                    </div>
+                    <div class="box-body">
+                        <div id="external-events">
+                            <div class="external-event bg-green">Public event</div>
+                            <div class="external-event bg-orange">Company's event</div>
+                            <div class="external-event bg-red">Private event</div>
+                        </div>
+                    </div>
+                     <!-- /.box-body -->
+                </div>
+                <!-- /. box -->
+            </div>
+        </div>
+    </div>
+
 
         <!-- Main content -->
         <section class="content">
@@ -184,11 +206,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="dataTables_length" id="allEvents_length">
-                                    <label>Show <select name="allEvents_length" aria-controls="allEvents" class="form-control input-sm">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option></select> entries</label>
+                                    <label>Show
+                                        <select name="allEvents_length" aria-controls="allEvents" class="form-control input-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        entries</label>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -299,7 +324,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Please provide additional info</h4>
+                    <h4 class="modal-title">Please provide the following info:</h4>
                 </div>
                 <div class="modal-body">
                     <div>
@@ -307,15 +332,37 @@
                         <input type="text" id="calendar-event-name">
                     </div>
                     <div>
+                        <label for="calendar-event-description">Event description</label>
+                        <input type="text" id="calendar-event-description">
+                    </div>
+                    <div>
+                        <label for="calendar-event-date-from">Event date from</label>
+                        <input type="text" id="calendar-event-date-from">
+                    </div>
+                    <div>
+                        <label for="calendar-event-date-to">Event date to</label>
+                        <input type="text" id="calendar-event-date-to">
+                    </div>
+                    <div>
                         <select name="calendar-event-style" id="calendar-event-style">
                             <option value="public">Public</option>
                             <option value="private">Private</option>
+                            <option value="company's">Company's</option>
                         </select>
                     </div>
                     <div>
                         <select name="calendar-event-type" id="calendar-event-type">
                             <option value="holiday">Holiday</option>
                             <option value="conference">Conference</option>
+                            <option value="meeting">Meeting</option>
+                            <option value="team-building">Team Building</option>
+                            <option value="bussiness-dinner">Bussiness dinner</option>
+                            <option value="networking">Networking</option>
+                            <option value="award-ceremonies">Award ceremonies</option>
+                            <option value="board-meeting">Board meeting</option>
+                            <option value="family-event">Family event</option>
+                            <option value="training">Traning</option>
+                            <option value="faculty-event">Faculty event</option>
                         </select>
                     </div>
                 </div>
@@ -361,7 +408,7 @@
         $('#allEvents').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false
@@ -386,9 +433,9 @@
     var $header = $("meta[name='_csrf_header']").attr("content");
 
     function getColorOfEvent(styleOfEvent) {
-        if (styleOfEvent.nameOfStyle === 'public') return 'green';
-        if (styleOfEvent.nameOfStyle === 'company\'s') return 'orange';
-        if (styleOfEvent.nameOfStyle === 'private') return 'red';
+        if (styleOfEvent === 'public') return 'green';
+        if (styleOfEvent === 'company\'s') return 'orange';
+        if (styleOfEvent === 'private') return 'red';
 
         return 'blue';
     }
@@ -473,10 +520,10 @@
                 right : 'month,agendaWeek,agendaDay'
             },
             buttonText: {
-                today: 'danas',
-                month: 'mesec',
-                week : 'nedelja',
-                day  : 'noc'
+                today: 'today',
+                month: 'month',
+                week : 'week',
+                day  : 'day'
             },
             events: calendarEvents,
             editable  : true,
