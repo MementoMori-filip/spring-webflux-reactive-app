@@ -181,7 +181,23 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="allUsers" class="table table-bordered table-striped">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="dataTables_length" id="allEvents_length">
+                                    <label>Show <select name="allEvents_length" aria-controls="allEvents" class="form-control input-sm">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option></select> entries</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="allEvents_filter" class="dataTables_filter">
+                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="Search..." aria-controls="allEvents"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="allEvents" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Name of Event</th>
@@ -192,6 +208,7 @@
                                 <th>Style of Event</th>
                                 <th>Type of Event</th>
                                 <th>Created by</th>
+                                <th>Add to calendar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -204,6 +221,7 @@
                                 <td class="teamB">[[${event.styleOfEvent}]]</td>
                                 <td class="teamB">[[${event.typeOfEvent}]]</td>
                                 <td class="teamB">[[${event.createdByUser}]]</td>
+                                <td><button type="button" class="btn btn-primary" id="add-event-to-calendar">Add event</button></td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -216,9 +234,45 @@
                                 <th>Style of Event</th>
                                 <th>Type of Event</th>
                                 <th>Created by</th>
+                                <th>Add to calendar</th>
                             <tr>
                             </tfoot>
                         </table>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="allEvents_info" role="status" aria-live="polite"></div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="allEvents_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button previous disabled" id="allEvents_previous">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="0" tabindex="0">Previous</a>
+                                        </li>
+                                        <li class="paginate_button active">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="1" tabindex="0">1</a>
+                                        </li>
+                                        <li class="paginate_button ">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="2" tabindex="0">2</a>
+                                        </li>
+                                        <li class="paginate_button ">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="3" tabindex="0">3</a>
+                                        </li>
+                                        <li class="paginate_button ">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="4" tabindex="0">4</a>
+                                        </li>
+                                        <li class="paginate_button ">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="5" tabindex="0">5</a>
+                                        </li>
+                                        <li class="paginate_button ">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="6" tabindex="0">6</a>
+                                        </li>
+                                        <li class="paginate_button next" id="example1_next">
+                                            <a href="#" aria-controls="allEvents" data-dt-idx="7" tabindex="0">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -300,6 +354,21 @@
 <script th:src="@{/dist/js/pages/dashboard2.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/dist/js/demo.js}"></script>
+
+
+<script>
+    $(function () {
+        $('#allEvents').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+    })
+</script>
+
 
 <script th:inline="javascript">
     /*<![CDATA[*/
