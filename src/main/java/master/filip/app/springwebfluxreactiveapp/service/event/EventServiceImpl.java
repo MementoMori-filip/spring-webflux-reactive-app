@@ -2,7 +2,6 @@ package master.filip.app.springwebfluxreactiveapp.service.event;
 
 import master.filip.app.springwebfluxreactiveapp.domain.Event;
 import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepository;
-import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;

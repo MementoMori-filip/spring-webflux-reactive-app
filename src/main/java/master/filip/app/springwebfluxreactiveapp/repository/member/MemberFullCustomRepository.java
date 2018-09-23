@@ -12,13 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MemberCustomRepository {
+public class MemberFullCustomRepository {
 
     private final CompanyRepository companyRepository;
     private final GroupRepository groupRepository;
     private final EventRepository eventRepository;
 
-    public MemberCustomRepository(CompanyRepository companyRepository, GroupRepository groupRepository, EventRepository eventRepository) {
+    public MemberFullCustomRepository(CompanyRepository companyRepository, GroupRepository groupRepository, EventRepository eventRepository) {
         super();
         this.companyRepository = companyRepository;
         this.groupRepository = groupRepository;

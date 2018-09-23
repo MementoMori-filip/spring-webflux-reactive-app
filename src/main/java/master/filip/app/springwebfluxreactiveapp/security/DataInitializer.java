@@ -1,5 +1,9 @@
 package master.filip.app.springwebfluxreactiveapp.security;
 
+import master.filip.app.springwebfluxreactiveapp.ambiguous.EventCustom;
+import master.filip.app.springwebfluxreactiveapp.repository.eventCustom.EventCustomFullReporsitory;
+import master.filip.app.springwebfluxreactiveapp.ambiguous.MemberCustom;
+import master.filip.app.springwebfluxreactiveapp.repository.memberCustom.MemberCustomFullRepository;
 import master.filip.app.springwebfluxreactiveapp.domain.*;
 import master.filip.app.springwebfluxreactiveapp.repository.company.CompanyRepository;
 import master.filip.app.springwebfluxreactiveapp.repository.event.EventRepository;
@@ -15,8 +19,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 
@@ -38,8 +43,11 @@ public class DataInitializer implements CommandLineRunner {
     private final MemberRepository memberRepository;
     private final CompanyRepository companyRepository;
 
+    private final EventCustomFullReporsitory eventCustomRepository;
+    private final MemberCustomFullRepository memberCustomRepository;
+
     @Autowired
-    public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder, GroupRepository groupRepository, TypeOfEventRepository typeOfEventRepository, StyleOfEventRepository styleOfEventRepository, EventRepository eventRepository, MemberRepository memberRepository, CompanyRepository companyRepository) {
+    public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder, GroupRepository groupRepository, TypeOfEventRepository typeOfEventRepository, StyleOfEventRepository styleOfEventRepository, EventRepository eventRepository, MemberRepository memberRepository, CompanyRepository companyRepository, EventCustomFullReporsitory eventCustomRepository, MemberCustomFullRepository memberCustomRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.groupRepository = groupRepository;
@@ -48,14 +56,138 @@ public class DataInitializer implements CommandLineRunner {
         this.eventRepository = eventRepository;
         this.memberRepository = memberRepository;
         this.companyRepository = companyRepository;
+
+        this.eventCustomRepository = eventCustomRepository;
+        this.memberCustomRepository = memberCustomRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
         createUsers();
-/*        createTypeOfEvents();
+/*      createTypeOfEvents();
         createStyleOfEvents();
         createMain();*/
+/*        createEventCustom();
+        createMemberCustom();*/
+    }
+
+    private void createMemberCustom() {
+        MemberCustom m1 = new MemberCustom(
+                "Filip Ivanovic",
+                "filipivanovic@outlook.com",
+                "filip",
+                "filip94",
+                "admin",
+                "Java Team",
+                "msg",
+                "Omladinskih brigada 90g"
+        );
+
+        MemberCustom m2 = new MemberCustom(
+                "Nikola Belovanovic",
+                "nikola94beki@gmail.com",
+                "nikola",
+                "n94",
+                "user",
+                "Java Team",
+                "msg",
+                "Omladinskih brigada 90g"
+        );
+
+        MemberCustom m3 = new MemberCustom(
+                "Dusan Savic",
+                "dulecar@fon.bg.ac.rs",
+                "dule",
+                "dulesavic",
+                "user",
+                "SILAB katedra",
+                "FON",
+                "Jove Ilica 154"
+        );
+
+        MemberCustom m4 = new MemberCustom(
+                "Milos Milic",
+                "mm@fon.bg.ac.com",
+                "milos",
+                "mm",
+                "user",
+                "SILAB katedra",
+                "FON",
+                "Jove Ilica 154"
+        );
+
+        List<MemberCustom> list = Arrays.asList(m1, m2, m3, m4);
+        this.memberCustomRepository.saveAll(list).subscribe();
+    }
+
+    private void createEventCustom() {
+
+        Date e1dateFrom = parseDate("2018-09-28");
+        Date e1dateTo = parseDate("2018-09-28");
+
+        EventCustom e1 = new EventCustom(
+                "Odbrana master rada",
+                "Spring WebFlux app",
+                e1dateFrom,
+                e1dateTo,
+                "Jove Ilica 154",
+                "public",
+                "faculty event",
+                "filip"
+        );
+
+        Date e2dateFrom = parseDate("2018-09-20");
+        Date e2dateTo = parseDate("2018-09-24");
+
+        EventCustom e2 = new EventCustom(
+                "JMS i Spring 5",
+                "Razvoj poslovnih resenja",
+                e2dateFrom,
+                e2dateTo,
+                "Omladinskih brigada 90g",
+                "company's",
+                "conference",
+                "nikola"
+        );
+
+        Date e3dateFrom = parseDate("2018-09-25");
+        Date e3dateTo = parseDate("2018-09-27");
+
+        EventCustom e3 = new EventCustom(
+                "Spring 5 in Nutshell",
+                "Everything you need to know about Spring 5",
+                e3dateFrom,
+                e3dateTo,
+                "Jove Ilica 154",
+                "public",
+                "faculty event",
+                "dule"
+        );
+
+        Date e4dateFrom = parseDate("2018-09-24");
+        Date e4dateTo = parseDate("2018-09-30");
+
+        EventCustom e4 = new EventCustom(
+                "Testiranje i kvalitet softvera",
+                "Kreiranje sopstvenih alata za odredjivanje kvaliteta softvera",
+                e4dateFrom,
+                e4dateTo,
+                "Jove Ilica 154",
+                "public",
+                "faculty event",
+                "milos"
+        );
+
+        List<EventCustom> list = Arrays.asList(e1, e2, e3, e4);
+        this.eventCustomRepository.saveAll(list).subscribe();
+    }
+
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     private void createUsers() {
