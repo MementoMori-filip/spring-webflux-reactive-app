@@ -67,7 +67,7 @@ public class DataInitializer implements CommandLineRunner {
 /*      createTypeOfEvents();
         createStyleOfEvents();
         createMain();*/
-        createEventCustom();
+        /*createEventCustom();*/
         /*createMemberCustom();*/
     }
 
@@ -150,7 +150,7 @@ public class DataInitializer implements CommandLineRunner {
         );
 
         Date e3dateFrom = parseDate("2018-09-24 15:00:00");
-        Date e3dateTo = parseDate("2018-09-24 21:00:00");
+        Date e3dateTo = parseDate("2018-09-25 10:30:00");
 
         EventCustom e3 = new EventCustom(
                 "Spring 5 in Nutshell",
