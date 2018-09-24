@@ -14,15 +14,8 @@ import java.util.List;
 @Repository
 public class MemberFullCustomRepository {
 
-    private final CompanyRepository companyRepository;
-    private final GroupRepository groupRepository;
-    private final EventRepository eventRepository;
-
     public MemberFullCustomRepository(CompanyRepository companyRepository, GroupRepository groupRepository, EventRepository eventRepository) {
         super();
-        this.companyRepository = companyRepository;
-        this.groupRepository = groupRepository;
-        this.eventRepository = eventRepository;
     }
 
     public Mono<Member> convertSpecificMember(Mono<Member> specificMember) {

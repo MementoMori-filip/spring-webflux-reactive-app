@@ -67,8 +67,8 @@ public class DataInitializer implements CommandLineRunner {
 /*      createTypeOfEvents();
         createStyleOfEvents();
         createMain();*/
-        /*createEventCustom();*/
-        /*createMemberCustom();*/
+/*        createEventCustom();
+        createMemberCustom();*/
     }
 
     private void createMemberCustom() {
@@ -79,8 +79,8 @@ public class DataInitializer implements CommandLineRunner {
                 "filip94",
                 "admin",
                 "Java Team",
-                "msg",
-                "Omladinskih brigada 90g"
+                "Endava",
+                "Milutina Milankovica 9dj"
         );
 
         MemberCustom m2 = new MemberCustom(
@@ -90,8 +90,8 @@ public class DataInitializer implements CommandLineRunner {
                 "n94",
                 "user",
                 "Java Team",
-                "msg",
-                "Omladinskih brigada 90g"
+                "Endava",
+                "Milutina Milankovica 9dj"
         );
 
         MemberCustom m3 = new MemberCustom(
@@ -130,9 +130,10 @@ public class DataInitializer implements CommandLineRunner {
                 e1dateFrom,
                 e1dateTo,
                 "Jove Ilica 154",
-                "public",
+                "private",
                 "faculty event",
-                "filip"
+                "filip",
+                "Endava"
         );
 
         Date e2dateFrom = parseDate("2018-09-24 10:00:00");
@@ -143,10 +144,11 @@ public class DataInitializer implements CommandLineRunner {
                 "Razvoj poslovnih resenja",
                 e2dateFrom,
                 e2dateTo,
-                "Omladinskih brigada 90g",
+                "Milutina Milankovica 9dj",
                 "company's",
                 "conference",
-                "nikola"
+                "nikola",
+                "Endava"
         );
 
         Date e3dateFrom = parseDate("2018-09-24 15:00:00");
@@ -157,10 +159,11 @@ public class DataInitializer implements CommandLineRunner {
                 "Everything you need to know about Spring 5",
                 e3dateFrom,
                 e3dateTo,
-                "Jove Ilica 154",
+                "Milutina Milankovica 9dj",
                 "public",
-                "faculty event",
-                "dule"
+                "training",
+                "nikola",
+                "Endava"
         );
 
         Date e4dateFrom = parseDate("2018-09-25 10:30:00");
@@ -171,13 +174,29 @@ public class DataInitializer implements CommandLineRunner {
                 "Kreiranje sopstvenih alata za odredjivanje kvaliteta softvera",
                 e4dateFrom,
                 e4dateTo,
-                "Jove Ilica 154",
+                "Milutina Milankovica 9dj",
                 "public",
-                "faculty event",
-                "milos"
+                "conference",
+                "nikola",
+                "Endava"
         );
 
-        List<EventCustom> list = Arrays.asList(e1, e2, e3, e4);
+        Date e5dateFrom = parseDate("2018-09-26 10:00:00");
+        Date e5dateTo = parseDate("2018-09-28 15:30:00");
+
+        EventCustom e5 = new EventCustom(
+                "Development Sync",
+                "Improving the design of existing code",
+                e5dateFrom,
+                e5dateTo,
+                "Milutina Milankovica 9dj",
+                "company's",
+                "meeting",
+                "filip",
+                "Endava"
+        );
+
+        List<EventCustom> list = Arrays.asList(e1, e2, e3, e4, e5);
         this.eventCustomRepository.saveAll(list).subscribe();
     }
 
