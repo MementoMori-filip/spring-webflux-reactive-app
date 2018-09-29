@@ -25,6 +25,9 @@
     <link rel="stylesheet" th:href="@{/bower_components/fullcalendar/dist/fullcalendar.min.css}">
     <link rel="stylesheet" th:href="@{/bower_components/fullcalendar/dist/fullcalendar.print.min.css}" media="print">
 
+    <!--datatable-->
+    <link rel="stylesheet" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+
     <!-- css for calendar -->
     <link rel="stylesheet" th:href="@{/dist/css/AdminLTE.min.css}">
 
@@ -203,25 +206,6 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="dataTables_length" id="allEvents_length">
-                                    <label>Show
-                                        <select name="allEvents_length" aria-controls="allEvents" class="form-control input-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select>
-                                        entries</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="allEvents_filter" class="dataTables_filter">
-                                    <label>Search:<input type="search" class="form-control input-sm" placeholder="Search..." aria-controls="allEvents"></label>
-                                </div>
-                            </div>
-                        </div>
                         <table id="allEvents" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -233,6 +217,7 @@
                                 <th>Style of Event</th>
                                 <th>Type of Event</th>
                                 <th>Created by</th>
+                                <th>Company</th>
                                 <th>Add to calendar</th>
                             </tr>
                             </thead>
@@ -246,7 +231,23 @@
                                 <td class="teamB">[[${event.styleOfEvent}]]</td>
                                 <td class="teamB">[[${event.typeOfEvent}]]</td>
                                 <td class="teamB">[[${event.createdByUser}]]</td>
-                                <td><button type="button" class="btn btn-primary" id="add-event-to-calendar">Add event</button></td>
+                                <td class="teamB">[[${event.companyName}]]</td>
+                                <td>
+                                    <button
+                                            type="button"
+                                            class="btn btn-primary add-event-to-calendar"
+                                            th:data-name="${event.nameOfEvent}"
+                                    >Add event
+                                    </button>
+                                    <button
+                                            type="button"
+                                            class="btn btn-danger remove-event-from-calendar"
+                                            th:data-event-id="${event.id}"
+                                            th:data-event-name="${event.nameOfEvent}"
+                                    >
+                                        Remove
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -259,45 +260,11 @@
                                 <th>Style of Event</th>
                                 <th>Type of Event</th>
                                 <th>Created by</th>
+                                <th>Company</th>
                                 <th>Add to calendar</th>
-                            <tr>
+                            </tr>
                             </tfoot>
                         </table>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="dataTables_info" id="allEvents_info" role="status" aria-live="polite"></div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="dataTables_paginate paging_simple_numbers" id="allEvents_paginate">
-                                    <ul class="pagination">
-                                        <li class="paginate_button previous disabled" id="allEvents_previous">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="0" tabindex="0">Previous</a>
-                                        </li>
-                                        <li class="paginate_button active">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="1" tabindex="0">1</a>
-                                        </li>
-                                        <li class="paginate_button ">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="2" tabindex="0">2</a>
-                                        </li>
-                                        <li class="paginate_button ">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="3" tabindex="0">3</a>
-                                        </li>
-                                        <li class="paginate_button ">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="4" tabindex="0">4</a>
-                                        </li>
-                                        <li class="paginate_button ">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="5" tabindex="0">5</a>
-                                        </li>
-                                        <li class="paginate_button ">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="6" tabindex="0">6</a>
-                                        </li>
-                                        <li class="paginate_button next" id="example1_next">
-                                            <a href="#" aria-controls="allEvents" data-dt-idx="7" tabindex="0">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -336,12 +303,8 @@
                         <input type="text" id="calendar-event-description">
                     </div>
                     <div>
-                        <label for="calendar-event-date-from">Event date from</label>
-                        <input type="text" id="calendar-event-date-from">
-                    </div>
-                    <div>
-                        <label for="calendar-event-date-to">Event date to</label>
-                        <input type="text" id="calendar-event-date-to">
+                        <label for="calendar-event-location">Event location</label>
+                        <input type="text" id="calendar-event-location">
                     </div>
                     <div>
                         <select name="calendar-event-style" id="calendar-event-style">
@@ -381,6 +344,9 @@
 <script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- DataTables -->
+<script th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 <!-- FastClick -->
 <script th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 <!-- AdminLTE App -->
@@ -393,12 +359,12 @@
 <!-- SlimScroll -->
 <script th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 <!-- ChartJS -->
-<script th:src="@{/bower_components/chart.js/Chart.js}"></script>
+<!--<script th:src="@{/bower_components/chart.js/Chart.js}"></script>-->
 <!-- fullCalendar -->
 <script th:src="@{/bower_components/moment/moment.js}"></script>
 <script th:src="@{/bower_components/fullcalendar/dist/fullcalendar.min.js}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script th:src="@{/dist/js/pages/dashboard2.js}"></script>
+<!--<script th:src="@{/dist/js/pages/dashboard2.js}"></script>-->
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/dist/js/demo.js}"></script>
 
@@ -414,6 +380,67 @@
             'autoWidth'   : false
         })
     })
+
+    $('.remove-event-from-calendar').click(function () {
+        var eventId = $(this).data('event-id')
+        var eventName = $(this).data('event-name')
+        var fullCalendarEventId = null
+
+        $calendar.fullCalendar('clientEvents').some(function (value) {
+            if (value.title === eventName) {
+                fullCalendarEventId = value._id
+
+                return true
+            }
+
+            return false
+        })
+
+        $calendar.fullCalendar('removeEvents', [fullCalendarEventId])
+
+        $.ajax({
+            url: "/event/" + eventId,
+            method: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader($header, $token);
+            },
+            xhrFields: {withCredentials: true},
+            async: true,
+            contentType: "application/json",
+            data: JSON.stringify(event),
+            dataType: "json"
+        }).then(function (data, textStatus, xhr) {
+            alert('Event deleted')
+        })
+    })
+
+    $('.add-event-to-calendar').click(function() {
+        var currentEventName = $(this).data('name')
+
+        if ($calendar.fullCalendar('clientEvents').some(function (value) {
+            return value.title === currentEventName
+        })) {
+            return
+        }
+
+        allEvents.some(function (el) {
+            if (el.nameOfEvent === currentEventName) {
+                var a = {
+                    title: el.nameOfEvent,
+                    start: new moment(el.dateFrom),
+                    end: new moment(el.dateTo),
+                    backgroundColor: getColorOfEvent(el.styleOfEvent),
+                    borderColor: getColorOfEvent(el.styleOfEvent)
+                }
+                $calendar.fullCalendar("renderEvent", a, !0)
+
+                return true
+            }
+
+            return false
+        });
+    })
+
 </script>
 
 
@@ -440,6 +467,20 @@
         return 'blue';
     }
 
+    function calendarMouseOverEvent(event, jsEvent, view ) {
+/*        var currentEvent = null
+        allEvents.some(function (value) {
+            if (value.nameOfEvent === event.title) {
+                currentEvent = value
+                return true
+            }
+
+            return false
+        })
+
+        alert(JSON.stringify(currentEvent))*/
+    }
+
     function saveCalendarEvent() {
         var event_title = $("#calendar-event-name").val()
         //u slucaju da ajax radi zakomentari to
@@ -452,24 +493,21 @@
         $calendar.fullCalendar("unselect")
         $("#calendar-event-name").val('')
         $('#eventCalendar').modal('hide')
-        // dovde
 
         var event = {
             nameOfEvent: event_title,
-            styleOfEvent: {
-                id: null,
-                nameOfStyle: $('#calendar-event-style').val()
-            },
-            typeOfEvent: {
-                id: null,
-                nameOfType: $('#calendar-event-type').val()
-            },
+            description: "Dodjite da zajedno proslavimo uz kiflice i pivo",
+            location: "Milutina Milankovica 9dj",
+            companyName: "Endava",
+            createdByUser: "filip",
+            styleOfEvent: $('#calendar-event-style').val(),
+            typeOfEvent: $('#calendar-event-type').val(),
             dateFrom: $t,
             dateTo: $n
         }
 
         $.ajax({
-            url: "/calendar/save",
+            url: "/event",
             method: 'POST',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader($header, $token);
@@ -503,7 +541,9 @@
         console.log(allEvents)
 
 
-        calendarEvents = allEvents.map(function (el) {
+        calendarEvents = allEvents.filter(function (el) {
+            return el.styleOfEvent === 'private'
+        }).map(function (el) {
             return {
                 title: el.nameOfEvent,
                 start: new Date(el.dateFrom),
@@ -526,6 +566,7 @@
                 day  : 'day'
             },
             events: calendarEvents,
+            eventMouseover: calendarMouseOverEvent,
             editable  : true,
             droppable : true,
             selectable: true,

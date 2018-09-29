@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 @Controller
 public class CalendarController {
 
+    private final String company = "Endava";
     private final EventRepository eventRepository;
     private final EventCustomFullReporsitory eventCustomFullReporsitory;
     private final MemberCustomFullRepository memberCustomFullRepository;
@@ -35,17 +36,12 @@ public class CalendarController {
         final Flux<EventCustom> allEvents = this.eventCustomFullReporsitory.findAll();
         final Mono<MemberCustom> currentMember = this.memberCustomFullRepository.findByUserUsername(user.getUsername());
 
-        //dodaj
-        final Flux<EventCustom> allEventsByCompany = this.eventCustomFullReporsitory.findAllByCompanyName("Endava");
+        //final Flux<EventCustom> allEventsByCompany = this.eventCustomFullReporsitory.findAllByCompanyName(company);
 
         model.addAttribute("allEvents", allEvents);
         model.addAttribute("currentMember", currentMember);
+        //model.addAttribute("allEventsByCompany", allEventsByCompany);
 
         return "calendar";
-    }
-
-    @PostMapping("/calendar/save")
-    public Mono<Event> saveEvent(@RequestBody Event event){
-        return eventRepository.save(event);
     }
 }
